@@ -3,18 +3,20 @@ package com.example.project_mugon.Model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.bson.types.ObjectId;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Barang {
-    public String namaBarang;
-    public double Harga;
-    public String TipeBarang;
-    public boolean IsBaru;
-    public double Kondisi;
+    private ObjectId ID;
+    private String namaBarang;
+    private double Harga;
+    private String TipeBarang;
+    private boolean IsBaru;
+    private double Kondisi;
     private String Lokasi;
-    public Trader Penjual;
+    private Trader Penjual;
 
     public void RequestToCheck() {
 

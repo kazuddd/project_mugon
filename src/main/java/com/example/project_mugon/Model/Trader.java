@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class Trader extends User {
     private String Email;
-    public String Nama;
+    private String Nama;
     protected String Password;
     private Barang[] Keranjang;
     private double Saldo;
