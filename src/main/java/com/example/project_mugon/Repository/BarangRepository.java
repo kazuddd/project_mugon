@@ -3,9 +3,11 @@ package com.example.project_mugon.Repository;
 import com.example.project_mugon.Model.Barang;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface BarangRepository extends MongoRepository<Barang, String> {
     Optional<Barang> findByNamaBarang(String namaBarang);
 

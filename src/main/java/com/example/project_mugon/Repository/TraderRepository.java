@@ -2,9 +2,11 @@ package com.example.project_mugon.Repository;
 
 import com.example.project_mugon.Model.Trader;
 import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
+@Repository
 public interface TraderRepository extends MongoRepository<Trader, String> {
     Optional<Trader> findByEmail(String email);
 

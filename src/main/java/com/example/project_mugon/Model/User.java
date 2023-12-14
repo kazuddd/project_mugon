@@ -11,6 +11,7 @@ import org.springframework.data.annotation.Id;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+    @Id
     private ObjectId ID;
     private String username;
     protected String password;

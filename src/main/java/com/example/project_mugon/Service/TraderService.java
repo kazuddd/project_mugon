@@ -49,22 +49,27 @@ public class TraderService {
     }
 
     // Sell an item
-    public void jualBarang(Barang barangToSell, Trader seller) {
-        // Implementation logic
+    public void jualBarang(Barang barangToSell) {
+        // LOGIC CREATE BARANG
+        barangRepository.save(barangToSell);
     }
 
-    // Check transactions
     public List<Transaksi> cekTransaksi(Trader trader) {
         return transaksiRepository.findByUsernamePembeli(trader.getEmail());
     }
 
-    // Buy an item
     public void beliBarang(Barang barangToBuy, Trader buyer) {
         // Implementation logic
     }
 
-    // Add funds to the trader's account
-    public void tambahSaldo(Trader trader, double amount) {
-        // Implementation logic
+    public void tambahSaldo(Trader currentTrader, double amount) {
+        Trader traderToUpdate = traderRepository.findById(currentTrader.getId())
+                .orElseThrow(() -> new IllegalArgumentException("Trader not found"));
+
+        // Update Saldo
+        double currentSaldo = traderToUpdate.getSaldo();
+        traderToUpdate.setSaldo(currentSaldo + amount);
+
+        traderRepository.save(traderToUpdate);
     }
 }

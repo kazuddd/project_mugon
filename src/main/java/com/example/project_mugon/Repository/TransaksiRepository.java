@@ -3,10 +3,12 @@ package com.example.project_mugon.Repository;
 import com.example.project_mugon.Model.Transaksi;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.lang.Nullable; // Import @Nullable annotation
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface TransaksiRepository extends MongoRepository<Transaksi, String> {
 
     // Save method adjusted to handle potential null

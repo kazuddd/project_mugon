@@ -5,11 +5,13 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
+import org.springframework.data.annotation.Id;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Transaksi {
+    @Id
     private ObjectId ID;
     public Barang[] ListBeli;
     public double TotalHarga;
