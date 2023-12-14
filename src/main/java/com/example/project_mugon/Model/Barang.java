@@ -20,9 +20,5 @@ public class Barang {
     private boolean IsBaru;
     private double Kondisi;
     private String Lokasi;
-    private Trader Penjual;
-
-    public void RequestToCheck() {
-
-    }
+    private String IdPenjual;
 }

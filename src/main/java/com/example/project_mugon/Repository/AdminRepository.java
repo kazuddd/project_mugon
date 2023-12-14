@@ -4,13 +4,15 @@ import com.example.project_mugon.Model.Admin;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import com.example.project_mugon.Model.Barang;
 import com.example.project_mugon.Repository.WaitingListRepository;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
 public interface AdminRepository extends MongoRepository<Admin, String> {
-    Optional<Admin> findByUsername(String username);
+    @NonNull
+    Optional<Admin> findById(@NonNull String id);
 
     default Admin saveAdmin(Admin admin) {
         if (admin != null) {
