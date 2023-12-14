@@ -8,7 +8,7 @@ import java.util.Optional;
 public interface AdminRepository extends MongoRepository<Admin, String> {
     Optional<Admin> findByUsername(String username);
 
-    // Save method adjusted to handle potential null
+    // method SAVE MongoDB
     default Admin saveAdmin(Admin admin) {
         if (admin != null) {
             return save(admin);
@@ -16,15 +16,15 @@ public interface AdminRepository extends MongoRepository<Admin, String> {
         throw new IllegalArgumentException("Cannot save null Admin");
     }
 
-    // Update method
+    // Update method MongoDB
     default Admin updateAdmin(Admin admin) {
         if (admin != null && findById(admin.getId()).isPresent()) {
-            return save(admin); // Save performs update if the entity already exists
+            return save(admin); //
         }
         throw new IllegalArgumentException("Cannot update non-existing or null Admin");
     }
 
-    // Delete method adjusted to handle potential null
+    // Delete method MongoDB
     default void deleteAdmin(Admin admin) {
         if (admin != null) {
             delete(admin);
@@ -33,13 +33,11 @@ public interface AdminRepository extends MongoRepository<Admin, String> {
         }
     }
 
-    // Create method to insert a new Admin
+    // Create method MongoDB
     default Admin createAdmin(Admin admin) {
         if (admin != null) {
-            return save(admin); // Save method inserts a new Admin
+            return save(admin);
         }
         throw new IllegalArgumentException("Cannot create null Admin");
     }
-
-    // Other custom methods for specific operations can be added here as needed.
 }

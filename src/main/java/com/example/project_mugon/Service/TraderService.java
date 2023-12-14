@@ -55,7 +55,7 @@ public class TraderService {
 
     // Check transactions
     public List<Transaksi> cekTransaksi(Trader trader) {
-        return transaksiRepository.findByUsernamePembeliOrUsernamePenjual(trader.getEmail(), trader.getEmail());
+        return transaksiRepository.findByUsernamePembeli(trader.getEmail());
     }
 
     // Buy an item

@@ -42,7 +42,5 @@ public interface TransaksiRepository extends MongoRepository<Transaksi, String> 
         throw new IllegalArgumentException("Cannot create null Transaksi");
     }
 
-    List<Transaksi> findByUsernamePembeliOrUsernamePenjual(String email, String email1);
-
-    // Other custom methods for specific operations can be added here as needed.
+    List<Transaksi> findByUsernamePembeli(String email);
 }

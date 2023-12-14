@@ -17,15 +17,15 @@ public interface BarangRepository extends MongoRepository<Barang, String> {
         throw new IllegalArgumentException("Cannot save null Barang");
     }
 
-    // Update method UPDATE
+    // Update method MongoDB
     default Barang updateBarang(Barang barang) {
         if (barang != null && existsById(String.valueOf(barang.getID()))) {
-            return save(barang); // Save performs update if the entity already exists
+            return save(barang);
         }
         throw new IllegalArgumentException("Cannot update non-existing or null Barang");
     }
 
-    // Update method DELETE
+    // Delete method MongoDB
     default void deleteBarang(Barang barang) {
         if (barang != null) {
             delete(barang);
@@ -34,13 +34,11 @@ public interface BarangRepository extends MongoRepository<Barang, String> {
         }
     }
 
-    // Create method to insert a new Barang
+    // Create method MongoDB
     default Barang createBarang(Barang barang) {
         if (barang != null) {
-            return save(barang); // Save method inserts a new Barang
+            return save(barang);
         }
         throw new IllegalArgumentException("Cannot create null Barang");
     }
-
-    // Other custom methods for specific operations can be added here as needed.
 }

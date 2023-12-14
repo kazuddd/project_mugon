@@ -15,5 +15,4 @@ public class Transaksi {
     public double TotalHarga;
     private String Lokasi;
     private String usernamePembeli;
-    private String usernamePenjual;
 }
