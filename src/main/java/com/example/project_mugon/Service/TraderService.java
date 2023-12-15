@@ -31,7 +31,7 @@ public class TraderService {
         // Check if the trader already exists
         Optional<Trader> existingTrader = traderRepository.findByEmail(trader.getEmail());
         if (existingTrader.isPresent()) {
-            throw new IllegalArgumentException("Trader with this email already exists.");
+            throw new IllegalArgumentException("Email sudah digunakan.");
         }
         return traderRepository.save(trader);
     }
@@ -69,7 +69,7 @@ public class TraderService {
     }
     public void addToKeranjang(Barang barangToBuy, Trader buyer) {
         Trader traderToUpdate = traderRepository.findById(buyer.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Trader not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Trader tidak ditemukan"));
 
         // Keranjang yang dimiliki oleh trader sebelum method
         Barang[] currentCart = traderToUpdate.getKeranjang();
@@ -124,12 +124,17 @@ public class TraderService {
             traderRepository.save(pembeli);
 
             // DELETE Barang dalam transaksi dari collection MarketPlace
+            for (Barang barang : keranjangPembeli) {
+                if (barang != null) {
+                    barangRepository.deleteBarang(barang);
+                }
+            }
         }
     }
 
     public void tambahSaldo(Trader currentTrader, double amount) {
         Trader traderToUpdate = traderRepository.findById(currentTrader.getId())
-                .orElseThrow(() -> new IllegalArgumentException("Trader not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Trader tidak ditemukan"));
 
         // Update Saldo
         double currentSaldo = traderToUpdate.getSaldo();

@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public class InspectorService {
 
-    private final WaitingListRepository waitingListRepository; // Adjusted repository name
+    private final WaitingListRepository waitingListRepository;
     private final MarketPlaceRepository marketPlaceRepository;
 
     @Autowired
@@ -26,13 +26,13 @@ public class InspectorService {
         if (barangOptional.isPresent()) {
             Barang selectedBarang = barangOptional.get();
 
-            // Move the selected Barang to MarketPlace
+            // Pindahkan barang ke MarketPlace
             marketPlaceRepository.save(selectedBarang);
 
-            // Delete from WaitingList
+            // Delete dari WaitingList
             waitingListRepository.delete(selectedBarang);
         } else {
-            throw new IllegalArgumentException("Barang not found in WaitingList.");
+            throw new IllegalArgumentException("Barang tidak ditemukan dalam WaitingList.");
         }
     }
 }
