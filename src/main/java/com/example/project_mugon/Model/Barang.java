@@ -21,4 +21,8 @@ public class Barang {
     private double Kondisi;
     private String Lokasi;
     private String IdPenjual;
+
+    public String getID(){
+        return String.valueOf(this.ID);
+    }
 }

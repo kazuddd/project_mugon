@@ -63,7 +63,6 @@ public class TraderService {
         // Input barang pada repository WaitingList
         barangRepository.save(newBarang);
     }
-
     public List<Transaksi> cekTransaksi(Trader trader) {
         return transaksiRepository.findByUsernamePembeli(trader.getEmail());
     }
