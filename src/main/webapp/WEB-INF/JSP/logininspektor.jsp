@@ -142,7 +142,7 @@
     <hr>
     <form class="login-form" action="#">
         <label for="Username"></label>
-        <input type="text" id="username" name="username" required placeholder="Username / Email">
+        <input type="text" id="username" name="username" required placeholder="Username">
 
         <input type="password" id="password" name="password" required placeholder="Password">
 

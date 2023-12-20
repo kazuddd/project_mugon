@@ -115,16 +115,16 @@
     <div class="menu">
         <a style="color: black; margin-bottom: 30px;" href="#">Daftar</a>
         <a style="color: silver;" href="/">Login</a></div>
-    <form class="Signup-form" action="#">
-        <label for="Username"></label>
-        <input type="text" id="username" name="username" required placeholder="Username">
+    <form class="Signup-form" action="/Register" method="post">
+        <label for="nama"></label>
+        <input type="text" id="nama" name="nama" required placeholder="Nama">
 
-        <input type="text" id="Email" name="Email" required placeholder="Email">
+        <input type="text" id="email" name="email" required placeholder="Email">
 
-        <input type="password" id="password" name="password" required required placeholder="Password">
+        <input type="password" id="password" name="password" required placeholder="Password">
 
         <button type="submit">
-            <a style="color: #fff" href="../Menu/Menu.html">BERIKUTNYA</a>
+            <a style="color: #fff" >BERIKUTNYA</a>
         </button>
     </form>
 </div>

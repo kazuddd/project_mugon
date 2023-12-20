@@ -4,6 +4,8 @@ import com.example.project_mugon.Model.Trader;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -20,7 +22,7 @@ public interface TraderRepository extends MongoRepository<Trader, String> {
 
     // Update method MongoDB
     default Trader updateTrader(Trader trader) {
-        if (trader != null && existsById(trader.getId())) {
+        if (trader != null && existsById(trader.getID())) {
             return save(trader);
         }
         throw new IllegalArgumentException("Cannot update non-existing or null Trader");

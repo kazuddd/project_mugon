@@ -138,16 +138,32 @@
         <a style="color: silver;" href="/loginadmin">Admin</a>
     </div>
     <hr>
-    <form class="login-form" action="#">
-        <label for="Username"></label>
-        <input type="text" id="username" name="username" required placeholder="Username / Email">
 
-        <input type="password" id="password" name="password" required required placeholder="Password">
+    <form class="login-form" action="/login" method="post">
+        <label for="email"></label>
+        <input type="text" id="email" name="email" required placeholder="Email">
+
+        <input type="text" id="password" name="password" required placeholder="Password">
 
         <button type="submit">
-            <a style="color: #fff" href="/menu">BERIKUTNYA</a>
+            <a style="color: #fff" >BERIKUTNYA</a>
         </button>
     </form>
+
+    <script>
+        function loginForm() {
+            var username = document.getElementById("email").value;
+            var password = document.getElementById("password").value;
+
+            // Client-side validation
+            if (!username || !password) {
+                alert("Please enter both email and password.");
+                return;
+            }
+
+            // Simulate a successful login - Replace this with your actual login logic
+        }
+    </script>
 </div>
 </body>
 </html>

@@ -13,7 +13,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document(collection = "WaitingList")
 public class Barang {
     @Id
-    private ObjectId ID;
+    private ObjectId _id;
     private String namaBarang;
     private double Harga;
     private String TipeBarang;
@@ -23,6 +23,6 @@ public class Barang {
     private String IdPenjual;
 
     public String getID(){
-        return String.valueOf(this.ID);
+        return String.valueOf(this._id);
     }
 }

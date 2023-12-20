@@ -12,12 +12,11 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 public class User {
     @Id
-    private ObjectId ID;
-    private String username;
+    private ObjectId _id;
+    private String nama;
     protected String password;
-    private String img_url;
 
-    public String getId() {
-        return ID.toString();
+    public String getID() {
+        return String.valueOf(this._id);
     }
 }

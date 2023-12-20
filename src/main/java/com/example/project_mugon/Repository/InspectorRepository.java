@@ -19,7 +19,7 @@ public interface InspectorRepository extends MongoRepository<Inspector, String> 
 
     // Update method MongoDB
     default Inspector updateInspector(Inspector inspector) {
-        if (inspector != null && findById(inspector.getId()).isPresent()) {
+        if (inspector != null && findById(inspector.getID()).isPresent()) {
             return save(inspector);
         }
         throw new IllegalArgumentException("Cannot update non-existing or null Inspector");

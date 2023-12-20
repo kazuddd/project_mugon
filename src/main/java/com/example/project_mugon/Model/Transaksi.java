@@ -12,9 +12,13 @@ import org.springframework.data.annotation.Id;
 @AllArgsConstructor
 public class Transaksi {
     @Id
-    private ObjectId ID;
+    private ObjectId _id;
     public Barang[] ListBeli;
     public double TotalHarga;
     private String Lokasi;
     private String usernamePembeli;
+
+    public String getID() {
+        return String.valueOf(this._id);
+    }
 }

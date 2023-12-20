@@ -1,6 +1,7 @@
 package com.example.project_mugon.Repository;
 
 import com.example.project_mugon.Model.Admin;
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import com.example.project_mugon.Model.Barang;
 import com.example.project_mugon.Repository.WaitingListRepository;
@@ -22,10 +23,15 @@ public interface AdminRepository extends MongoRepository<Admin, String> {
     }
 
     default Admin updateAdmin(Admin admin) {
-        if (admin != null && existsById(admin.getId())) {
-            return save(admin);
+        if (admin != null) {
+            ObjectId adminId = admin.get_id(); // Assuming get_id() returns ObjectId
+
+            if (adminId != null && existsById(String.valueOf(adminId))) {
+                return save(admin);
+            }
+            throw new IllegalArgumentException("Cannot update non-existing or null Admin");
         }
-        throw new IllegalArgumentException("Cannot update non-existing or null Admin");
+        throw new IllegalArgumentException("Cannot update null Admin");
     }
 
     default void deleteAdmin(Admin admin) {
