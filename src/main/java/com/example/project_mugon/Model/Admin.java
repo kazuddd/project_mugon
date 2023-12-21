@@ -11,5 +11,5 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Data
 @AllArgsConstructor
 public class Admin extends User {
-    private String Username;
+    private String username;
 }

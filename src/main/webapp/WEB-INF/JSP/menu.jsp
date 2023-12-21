@@ -237,8 +237,8 @@
     </div>
     <div class="profile">
         <a href="../Profile/Profile.html"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
-        <a href="../Topup/Topup.html"><span1>Ridho Udin</span1></a>
-        <a href="../Topup/Topup.html"><span2>Rp. 20.000.000</span2></a>
+        <a href="../Topup/Topup.html"><span1>${loggedInUser.nama}</span1></a>
+        <a href="../Topup/Topup.html"><span2>Rp. ${loggedInUser.saldo}</span2></a>
     </div>
     <div class="search-bar">
         <input type="text" placeholder="Cari produk...">

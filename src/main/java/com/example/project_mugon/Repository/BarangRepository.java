@@ -21,7 +21,7 @@ public interface BarangRepository extends MongoRepository<Barang, String> {
 
     // Update method MongoDB
     default Barang updateBarang(Barang barang) {
-        if (barang != null && existsById(String.valueOf(barang.getID()))) {
+        if (barang != null && existsById(String.valueOf(barang.get_id()))) {
             return save(barang);
         }
         throw new IllegalArgumentException("Cannot update non-existing or null Barang");

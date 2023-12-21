@@ -12,8 +12,8 @@ import java.util.Optional;
 
 @Repository
 public interface AdminRepository extends MongoRepository<Admin, String> {
-    @NonNull
-    Optional<Admin> findById(@NonNull String id);
+
+    Optional<Admin> findByUsername(String username);
 
     default Admin saveAdmin(Admin admin) {
         if (admin != null) {

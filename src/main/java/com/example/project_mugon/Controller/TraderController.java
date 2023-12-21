@@ -18,7 +18,7 @@ public class TraderController {
         this.traderService = traderService;
     }
 
-    @PostMapping("/login") // Make sure the correct mapping is specified ("/login")
+    @PostMapping("/login")
     public String login(@RequestParam("email") String email,
                         @RequestParam("password") String password,
                         HttpSession session) {
@@ -27,10 +27,10 @@ public class TraderController {
 
         // Pengecekan apakah login berhasil
         if (loggedInUser != null) {
-            // Set the user object in the session for further use
+            // Set session menjadi atribut user yang login
             session.setAttribute("loggedInUser", loggedInUser);
 
-            // Redirect to a success page if login is successful
+            // Redirect ke menu utama jika berhasil
             return "redirect:/menu";
         } else {
             // Redirect jika login gagal

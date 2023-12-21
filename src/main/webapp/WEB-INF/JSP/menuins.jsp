@@ -235,7 +235,7 @@
     </div>
     <div class="profile">
         <a href="../Profile/ProfileInspek.html"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
-        <h3>InspekBoli</h3>
+        <h3>${loggedInInspector.nama}</h3>
     </div>
     <div class="logout">
         <a id="logout" href="/">Logout</a>

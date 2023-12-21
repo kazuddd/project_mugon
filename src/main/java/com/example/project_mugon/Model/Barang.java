@@ -15,12 +15,12 @@ public class Barang {
     @Id
     private ObjectId _id;
     private String namaBarang;
-    private double Harga;
-    private String TipeBarang;
-    private boolean IsBaru;
-    private double Kondisi;
-    private String Lokasi;
-    private String IdPenjual;
+    private double harga;
+    private String tipeBarang;
+    private boolean isBaru;
+    private double kondisi;
+    private String lokasi;
+    private ObjectId idPenjual;
 
     public String getID(){
         return String.valueOf(this._id);

@@ -140,7 +140,7 @@
         <a style="color: silver;" href="/loginadmin">Admin</a>
     </div>
     <hr>
-    <form class="login-form" action="#">
+    <form class="login-form" action="/logininspektor/loginInspector" mtehod="post">
         <label for="Username"></label>
         <input type="text" id="username" name="username" required placeholder="Username">
 

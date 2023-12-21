@@ -66,11 +66,11 @@ public class TraderService {
         newBarang.setNamaBarang(namaBarang);
         newBarang.setHarga(harga);
         newBarang.setTipeBarang(tipeBarang);
-        newBarang.setIsBaru(isBaru);
+        newBarang.setBaru(isBaru);
         newBarang.setKondisi(0);
         newBarang.setKondisi(kondisi);
         newBarang.setLokasi(lokasi);
-        newBarang.setIdPenjual(seller.getID());
+        newBarang.setIdPenjual(seller.get_id());
 
         // Input barang pada repository WaitingList
         barangRepository.save(newBarang);

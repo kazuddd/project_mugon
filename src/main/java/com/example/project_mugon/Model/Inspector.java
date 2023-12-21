@@ -11,5 +11,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @AllArgsConstructor
 @Document(collection = "Inspector")
 public class Inspector extends User {
-    private String Username;
+    private String username;
+    private int totalInspect;
 }
