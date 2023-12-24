@@ -2,9 +2,6 @@ package com.example.project_mugon.Controller;
 
 import com.example.project_mugon.Model.Barang;
 import com.example.project_mugon.Model.Inspector;
-import com.example.project_mugon.Model.Trader;
-import com.example.project_mugon.Repository.BarangRepository;
-import com.example.project_mugon.Repository.MarketPlaceRepository;
 import com.example.project_mugon.Service.BarangService;
 import com.example.project_mugon.Service.InspectorService;
 import jakarta.servlet.http.HttpSession;
@@ -19,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class InspectorController {
     private final InspectorService inspectorService;
     private final BarangService barangService;
-    public InspectorController(InspectorService inspectorService, BarangService barangService, BarangRepository barangRepository, MarketPlaceRepository marketPlaceRepository) {
+    public InspectorController(InspectorService inspectorService, BarangService barangService) {
         this.inspectorService = inspectorService;
         this.barangService = barangService;
     }
