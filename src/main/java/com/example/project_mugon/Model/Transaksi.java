@@ -7,16 +7,17 @@ import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Transaksi {
     @Id
     private ObjectId _id;
-    public Barang[] ListBeli;
-    public double TotalHarga;
-    private String Lokasi;
-    private String usernamePembeli;
+    public List<Barang> listBeli;
+    public double totalHarga;
+    private ObjectId usernamePembeli;
 
     public String getID() {
         return String.valueOf(this._id);

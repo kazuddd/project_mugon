@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface BarangRepository extends MongoRepository<Barang, String> {
     Optional<Barang> findByNamaBarang(String namaBarang);
 
+    Optional<Barang> findBy_id(ObjectId _id);
+
     // method SAVE MongoDB
     default Barang saveBarang(Barang barang) {
         if (barang != null) {

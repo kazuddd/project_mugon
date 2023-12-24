@@ -2,9 +2,11 @@ package com.example.project_mugon.Service;
 
 import com.example.project_mugon.Model.Barang;
 import com.example.project_mugon.Model.Inspector;
+import com.example.project_mugon.Repository.BarangRepository;
 import com.example.project_mugon.Repository.InspectorRepository;
 import com.example.project_mugon.Repository.MarketPlaceRepository;
 import com.example.project_mugon.Repository.WaitingListRepository;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,13 +15,13 @@ import java.util.Optional;
 @Service
 public class InspectorService {
 
-    private final WaitingListRepository waitingListRepository;
+    private final BarangRepository barangRepository;
     private final MarketPlaceRepository marketPlaceRepository;
     private final InspectorRepository inspectorRepository;
 
     @Autowired
-    public InspectorService(WaitingListRepository waitingListRepository, MarketPlaceRepository marketPlaceRepository, InspectorRepository inspectorRepository) {
-        this.waitingListRepository = waitingListRepository;
+    public InspectorService(WaitingListRepository waitingListRepository, BarangRepository barangRepository, MarketPlaceRepository marketPlaceRepository, InspectorRepository inspectorRepository) {
+        this.barangRepository = barangRepository;
         this.marketPlaceRepository = marketPlaceRepository;
         this.inspectorRepository = inspectorRepository;
     }
@@ -35,17 +37,19 @@ public class InspectorService {
         return null;
     }
 
-    public void verifyBarang(String barangId) {
-        Optional<Barang> barangOptional = waitingListRepository.findById(barangId);
+    public void verifyBarang(ObjectId barangId, double ratingKondisi) {
+        Optional<Barang> barangOptional = barangRepository.findBy_id(barangId);
 
         if (barangOptional.isPresent()) {
+            // Mengambil barang dan set rating dari inspector
             Barang selectedBarang = barangOptional.get();
+            selectedBarang.setKondisi(ratingKondisi);
 
             // Pindahkan barang ke MarketPlace
             marketPlaceRepository.save(selectedBarang);
 
             // Delete dari WaitingList
-            waitingListRepository.delete(selectedBarang);
+            barangRepository.delete(selectedBarang);
         } else {
             throw new IllegalArgumentException("Barang tidak ditemukan dalam WaitingList.");
         }

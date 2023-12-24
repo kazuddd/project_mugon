@@ -12,8 +12,4 @@ import java.util.Optional;
 public interface WaitingListRepository extends MongoRepository<Barang, String> {
 
     Optional<Barang> findById(String barangId);
-
-    default void delete(Barang selectedBarang) {
-        deleteById(selectedBarang.getID());
-    }
 }
