@@ -5,7 +5,6 @@ import com.example.project_mugon.Model.Inspector;
 import com.example.project_mugon.Repository.BarangRepository;
 import com.example.project_mugon.Repository.InspectorRepository;
 import com.example.project_mugon.Repository.MarketPlaceRepository;
-import com.example.project_mugon.Repository.WaitingListRepository;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +19,7 @@ public class InspectorService {
     private final InspectorRepository inspectorRepository;
 
     @Autowired
-    public InspectorService(WaitingListRepository waitingListRepository, BarangRepository barangRepository, MarketPlaceRepository marketPlaceRepository, InspectorRepository inspectorRepository) {
+    public InspectorService(BarangRepository barangRepository, MarketPlaceRepository marketPlaceRepository, InspectorRepository inspectorRepository) {
         this.barangRepository = barangRepository;
         this.marketPlaceRepository = marketPlaceRepository;
         this.inspectorRepository = inspectorRepository;
