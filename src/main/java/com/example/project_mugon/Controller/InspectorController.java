@@ -19,13 +19,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class InspectorController {
     private final InspectorService inspectorService;
     private final BarangService barangService;
-    private final BarangRepository barangRepository;
-    private final MarketPlaceRepository marketPlaceRepository;
     public InspectorController(InspectorService inspectorService, BarangService barangService, BarangRepository barangRepository, MarketPlaceRepository marketPlaceRepository) {
         this.inspectorService = inspectorService;
         this.barangService = barangService;
-        this.barangRepository = barangRepository;
-        this.marketPlaceRepository = marketPlaceRepository;
     }
 
     @PostMapping("/loginInspector")
