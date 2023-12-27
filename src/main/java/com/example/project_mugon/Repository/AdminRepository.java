@@ -3,9 +3,6 @@ package com.example.project_mugon.Repository;
 import com.example.project_mugon.Model.Admin;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import com.example.project_mugon.Model.Barang;
-import com.example.project_mugon.Repository.WaitingListRepository;
-import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;

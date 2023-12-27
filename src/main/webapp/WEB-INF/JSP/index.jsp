@@ -149,21 +149,6 @@
             <a style="color: #fff" >BERIKUTNYA</a>
         </button>
     </form>
-
-    <script>
-        function loginForm() {
-            var username = document.getElementById("email").value;
-            var password = document.getElementById("password").value;
-
-            // Client-side validation
-            if (!username || !password) {
-                alert("Please enter both email and password.");
-                return;
-            }
-
-            // Simulate a successful login - Replace this with your actual login logic
-        }
-    </script>
 </div>
 </body>
 </html>

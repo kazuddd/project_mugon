@@ -1,3 +1,5 @@
+<%@ page import="com.example.project_mugon.Model.Barang" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +10,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap">
 </head>
 
+
 <style>
+
     /* Styling header */
 
 
@@ -33,6 +37,7 @@
     }
 
     .labelInspek {
+        font-family: 'Josefin Sans', sans-serif;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -41,10 +46,11 @@
         width: 40%; /* Set the width as needed */
         margin: 0 auto; /* Center horizontally */
         border-radius: 20px;
+        color: white;
+        font-weight: bold;
     }
 
     .labelInspek h1 {
-        color: #000000;
         font-size: 24px
     }
 
@@ -71,12 +77,17 @@
         z-index: 1;
     }
 
+    .jual {
+        color: white;
+    }
+
     .search-bar input {
         width: 800px;
         height: 35px;
         border: 5px solid white;
         border-radius: 50px;
-        max-width: 800px;
+        max-width: 750px;
+        align-items: center;
     }
 
     .cart{
@@ -141,27 +152,70 @@
     }
 
     /* Styling main content */
-    main {
+    .main {
+        display: flex;
+        flex-wrap: wrap;
         padding: 20px;
+        justify-content: center;
     }
 
     .iklan {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
+        flex: 0 0 calc(30% - 10px);
+        margin-bottom: 50px;
+        margin: 10px;
+        justify-content: center;
+        margin-left: 10%;
+        margin-top: 2%;
     }
 
     .iklan-box {
-        width: 30%;
+        width: 90%;
         border: 5px solid #bbb9b9;
         padding: 10px;
         text-align: left;
         background-color: white;
-        margin-top: 5%;
-        width: 200px;
-        margin-left: 10%;
         box-shadow: 1px 7px 10px 4px grey;
         border-radius: 10px;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .isi {
+        display: flex;
+        align-items: center; /* Memastikan gambar dan teks sejajar secara vertikal */
+    }
+
+    .kotakgmbr {
+        margin-right: 20px; /* Menambahkan margin untuk memberikan ruang antara gambar dan teks */
+        border: 2px solid #000000;
+        width: 300px;
+        height: 300px;
+        display: inline-block;
+    }
+
+    .kotakgmbr img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    /* Tambahkan gaya untuk teks dan rating */
+    .isi div {
+        max-width: 400px; /* Menentukan lebar maksimum teks */
+    }
+
+    .rate {
+        display: flex;
+        justify-content: center; /* Menyelaraskan elemen di tengah secara horizontal */
+        align-items: center; /* Menyelaraskan elemen di tengah secara vertikal */
+        width: 60px; /* Atur ukuran sesuai kebutuhan */
+        height: 60px; /* Atur ukuran sesuai kebutuhan */
+        border: 2px solid #000000;
+        border-radius: 50%; /* Membuat elemen menjadi lingkaran */
+    }
+
+    .rate div {
+        text-align: center;
     }
 
     /* Styling logout link */
@@ -225,20 +279,35 @@
         color: #fff; /* Ganti dengan kode warna yang Anda inginkan, contoh: merah (#FF0000) */
     }
 
+    .rating {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .kotak {
+        text-align: center;
+    }
+
+
+    /* Additional styles as needed */
+
 
 </style>
+
+
 
 <body>
 <div class="Menu">
     <div class="logo">
-        <a href="../Menu/MenuInspek.html"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
+        <a href="/menuins"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
     </div>
     <div class="profile">
-        <a href="../Profile/ProfileInspek.html"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
+        <a href="/profileins"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
         <h3>${loggedInInspector.nama}</h3>
     </div>
     <div class="logout">
-        <a id="logout" href="/">Logout</a>
+        <a id="logout" href="/logininspektor">Logout</a>
     </div>
 </div>
 
@@ -249,39 +318,47 @@
 </div>
 
 <main>
-    <section class="iklan">
-        <div class="iklan-box">
-            <img src="product1.jpg" alt="Produk 1">
-            <h3>Nama Produk 1</h3>
-            <p>Harga: $50.00</p>
-            <p>Detail: Deskripsi produk ini.</p>
-            <p>Lokasi: Kota Anda</p>
-        </div>
-        <!-- Tambahkan lebih banyak iklan box sesuai kebutuhan -->
-    </section>
+    <div id="barangList">
+        <%
+            List<Barang> items = (List<Barang>) session.getAttribute("items");
+            if (items != null) {
+                for (int i = 0; i < items.size(); i++) {
+                    Barang item = items.get(i);
+        %>
+        <section class="iklan">
+            <div class="iklan-box">
+                <div class="isi">
+                    <div class="kotakgmbr">
+                        <img src="../asep/iklan.png" alt="Produk <%= i + 1 %>">
+                    </div>
+                    <div>
+                        <a href="../Iklan/iklan.html">
+                            <h3><%= item.getNamaBarang() %></h3>
+                        </a>
+                        <p>Harga: IDR. <%= item.getHarga() %></p>
+                        <p>Tipe Barang: <%= item.getTipeBarang() %></p>
+                        <p>isBaru: <%= item.isBaru() %></p>
+                        <p>Kondisi: <%= item.getKondisi() %></p>
+                        <p>Lokasi: <%= item.getLokasi() %></p>
+                    </div>
+                </div>
+                <div class="rating">
+                    <form action="/logininspektor/submitRating" method="post">
+                        <input type="hidden" id ="" name="itemId" value="<%= item.getID() %>">
+                        <div class="kotak">
+                            <input type="text" id="rating" name="rating" required placeholder="rating">
+                            <button type="submit">Rate</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
 
-    <section class="iklan">
-        <div class="iklan-box">
-            <img src="product1.jpg" alt="Produk 2">
-            <h3>Nama Produk 2</h3>
-            <p>Harga: $50.00</p>
-            <p>Detail: Deskripsi produk ini.</p>
-            <p>Lokasi: Kota Anda</p>
-        </div>
-        <!-- Tambahkan lebih banyak iklan box sesuai kebutuhan -->
-    </section>
-
-    <section class="iklan">
-        <div class="iklan-box">
-            <img src="product1.jpg" alt="Produk 3">
-            <h3>Nama Produk 3</h3>
-            <p>Harga: $50.00</p>
-            <p>Detail: Deskripsi produk ini.</p>
-            <p>Lokasi: Kota Anda</p>
-        </div>
-        <!-- Tambahkan lebih banyak iklan box sesuai kebutuhan -->
-    </section>
-</main>
+        <%
+                }
+            }
+        %>
+    </div>
 
 <div class="overlay" id="logoutOverlay">
     <div class="confirm-box">

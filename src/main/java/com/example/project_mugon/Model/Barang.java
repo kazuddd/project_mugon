@@ -21,6 +21,7 @@ public class Barang {
     private double kondisi;
     private String lokasi;
     private ObjectId idPenjual;
+    private boolean isVerified;
 
     public String getID(){
         return String.valueOf(this._id);

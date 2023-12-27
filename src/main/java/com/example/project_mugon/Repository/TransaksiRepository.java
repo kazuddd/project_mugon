@@ -21,7 +21,7 @@ public interface TransaksiRepository extends MongoRepository<Transaksi, String> 
 
     // Update method
     default Transaksi updateTransaksi(Transaksi transaksi) {
-        if (transaksi != null && transaksi.getID() != null && existsById(transaksi.getID().toString())) {
+        if (transaksi != null && transaksi.getID() != null && existsById(transaksi.getID())) {
             return save(transaksi); // Save performs update if the entity already exists
         }
         throw new IllegalArgumentException("Cannot update non-existing or null Transaksi");
@@ -43,6 +43,4 @@ public interface TransaksiRepository extends MongoRepository<Transaksi, String> 
         }
         throw new IllegalArgumentException("Cannot create null Transaksi");
     }
-
-    List<Transaksi> findByUsernamePembeli(String email);
 }

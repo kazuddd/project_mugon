@@ -140,14 +140,14 @@
         <a style="color: silver;" href="/loginadmin">Admin</a>
     </div>
     <hr>
-    <form class="login-form" action="/logininspektor/loginInspector" mtehod="post">
+    <form class="login-form" action="/logininspektor/loginInspector" method="post">
         <label for="Username"></label>
         <input type="text" id="username" name="username" required placeholder="Username">
 
         <input type="password" id="password" name="password" required placeholder="Password">
 
         <button type="submit">
-            <a style="color: #fff" href="/menuins">BERIKUTNYA</a>
+            <a style="color: #fff" >BERIKUTNYA</a>
         </button>
     </form>
 </div>

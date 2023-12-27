@@ -6,36 +6,68 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class routing {
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "index";
     }
+
     @GetMapping("/loginadmin")
-    public String  loginadmin(){
+    public String loginadmin() {
         return "loginadmin";
     }
+
     @GetMapping("/logininspektor")
-    public String  logininspektor(){
+    public String logininspektor() {
         return "logininspektor";
     }
 
     @GetMapping("/daftar")
-    public String  daftar(){
+    public String daftar() {
         return "daftar";
     }
 
     @GetMapping("/menu")
-    public String  menu(){
+    public String menu() {
         return "menu";
     }
 
     @GetMapping("/menuadm")
-    public String  menuadm(){
+    public String menuadm() {
         return "menuadm";
     }
 
     @GetMapping("/menuins")
-    public String  menuins() {
+    public String menuins() {
         return "menuins";
     }
-    
+
+
+    @GetMapping("/profile")
+    public String profile() {
+        return "profile";
+    }
+
+    @GetMapping("/profileadm")
+    public String profileadm() {
+        return "profileadm";
+    }
+
+    @GetMapping("/profileins")
+    public String profileins() {
+        return "profileins";
+    }
+
+    @GetMapping("/topup")
+    public String topup() {
+        return "topup";
+    }
+
+    @GetMapping("/keranjang")
+    public String keranjang() {
+        return "keranjang";
+    }
+
+    @GetMapping("/jual")
+    public String jual() {
+        return "jual";
+    }
 }

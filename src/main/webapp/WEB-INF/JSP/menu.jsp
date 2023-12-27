@@ -200,6 +200,22 @@
         text-align: center;
     }
 
+    .jual a {
+        color: white;
+        text-decoration: none;
+    }
+
+    .jual {
+        color: white; /* Tambahkan properti ini untuk mengubah warna teks menjadi putih */
+        margin-left: 100px; /* Sesuaikan nilai margin-left sesuai kebutuhan */
+    }
+
+    .jual-form {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row-reverse;
+    }
+
     .confirm-box p {
         font-size: 18px;
         margin-bottom: 20px;
@@ -235,6 +251,11 @@
     <div class="logo">
         <a href="/menu"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
     </div>
+
+    <div class="jual">
+        <a href="/jual"><p>Jual Barang</p></a>
+    </div>
+
     <div class="profile">
         <a href="../Profile/Profile.html"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
         <a href="../Topup/Topup.html"><span1>${loggedInUser.nama}</span1></a>
@@ -244,7 +265,7 @@
         <input type="text" placeholder="Cari produk...">
     </div>
     <div class="cart">
-        <a href="../Keranjang/Keranjang.html"><img src="../asep/keranjang.png" alt="Keranjang Belanja"/></a>
+        <a href="../keranjang"><img src="../asep/keranjang.png" alt="Keranjang Belanja"/></a>
     </div>
 
     <div class="logout">
