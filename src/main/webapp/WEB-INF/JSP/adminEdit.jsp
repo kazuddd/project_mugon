@@ -328,65 +328,52 @@
     <img src="../asep/Group 12.png" alt="Gambar Anda" class="mug-2">
     <div class="jual-container">
         <div class="header">
-            <h2>Form Penjualan</h2>
+            <h2>Edit Iklan</h2>
         </div>
 
-            <form method="post" action="/Jual">
-                <div class="container1">
-                    <div>
-                        <input type="text" id="namabarang" name="namabarang" required placeholder="Nama Barang">
-                    </div>
+
+        <form method="post" action="/Jual">
+            <div class="container1">
+                <div>
+                    <input type="text" id="namabarang" name="namabarang" required placeholder="Nama Barang">
                 </div>
-                <div class="container1">
-                    <div>
-                        <input type="text" id="hargabarang" name="hargabarang" required placeholder="Harga Barang">
-                    </div>
+            </div>
+
+            <div class="container1">
+                <div>
+                    <input type="text" id="lokasibarang" name="lokasibarang" required placeholder="Lokasi Barang">
                 </div>
-                <div class="container1">
-                    <div>
-                        <input type="text" id="lokasibarang" name="lokasibarang" required placeholder="Lokasi Barang">
-                    </div>
-                </div>
+            </div>
 
-                <div class="container12-radio">
-                    <div>
+            <div class="container12-radio">
+                <div>
 
-                        <input type="radio" id="tipebarang" name="tipebarang" required placeholder="Tipe Barang" value="Tiup">
-                        <label for="baru">Tiup</label>
-                    </div>
-
-                    <div>
-
-                        <input type="radio" id="tipebarang" name="tipebarang" required placeholder="Tipe Barang" value="Petik">
-                        <label for="baru">Petik</label>
-                    </div>
-
-                    <div>
-
-                        <input type="radio" id="tipebarang" name="tipebarang" required placeholder="Tipe Barang" value="Tabuh">
-                        <label for="bekas">Tabuh</label>
-                    </div>
+                    <input type="radio" id="tipebarang" name="tipebarang" required placeholder="Tipe Barang" value="Tiup">
+                    <label for="baru">Tiup</label>
                 </div>
 
+                <div>
 
-                <div class="container1-radio">
-                    <div>
-                        <input type="radio" id="condition-baru" name="condition" value="baru" required>
-                        <label for="condition-baru">Baru (New)</label>
-                    </div>
-                    <div>
-                        <input type="radio" id="condition-bekas" name="condition" value="bekas" required>
-                        <label for="condition-bekas">Bekas (Used)</label>
-                    </div>
+                    <input type="radio" id="tipebarang" name="tipebarang" required placeholder="Tipe Barang" value="Petik">
+                    <label for="baru">Petik</label>
                 </div>
-                <div class="container1">
-                    <button class="kirim-button">Kirim Iklan</button>
+
+                <div>
+
+                    <input type="radio" id="tipebarang" name="tipebarang" required placeholder="Tipe Barang" value="Tabuh">
+                    <label for="bekas">Tabuh</label>
                 </div>
-            </form>
+            </div>
 
 
-        </div>
+            <div class="container1">
+                <button class="kirim-button">Sumbit</button>
+            </div>
+        </form>
+
+
     </div>
+</div>
 
 </body>
 </html>

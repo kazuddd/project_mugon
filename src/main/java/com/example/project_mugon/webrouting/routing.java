@@ -101,4 +101,30 @@ public class routing {
         return "notifTrans";
     }
 
+    @GetMapping("/notifJual")
+    public String  notifJual() {
+        return "notifJual";
+    }
+
+    @GetMapping("/notifTopup")
+    public String  notifTopup() {
+        return "notifTopup";
+    }
+
+    @GetMapping("/gagalLogin")
+    public String  gagalLogin() {
+        return "gagalLogin";
+    }
+
+    @GetMapping("/gagalCekot")
+    public String  gagalCekot() {
+        return "gagalCekot";
+    }
+
+    @GetMapping("/adminEdit")
+    public String  adminEdit() {
+        return "adminEdit";
+    }
+
+
 }
