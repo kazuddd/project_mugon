@@ -207,7 +207,7 @@
         <a href="/menu"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
     </div>
     <div class="profile">
-        <a href="/profile"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
+        <a href="/profile"> <img src="../asep/profiledef.png" alt="Profil Anda"/></a>
         <a href="/topup"><span1>${loggedInUser.nama}</span1></a>
         <a href="/topup"><span2>Rp. ${loggedInUser.nama}</span2></a>
     </div>

@@ -87,18 +87,27 @@ public class TraderController {
 
     @PostMapping("/Jual")
     public String jualBarang(@RequestParam("namabarang") String namabarang,
-                             @RequestParam("hargabarang") double hargabarang,
+                             @RequestParam("hargabarang") String hargabarang,
                              @RequestParam("lokasibarang") String lokasibarang,
                              @RequestParam("tipebarang") String tipebarang,
                              @RequestParam("condition") String condition,
                              HttpSession session) {
 
+        // Check if the hargabarang input is a valid number
+        double harga;
+        try {
+            harga = Double.parseDouble(hargabarang);
+        } catch (NumberFormatException e) {
+            // If hargabarang is not a valid number, redirect to "/"
+            return "redirect:/gagalNgiklan";
+        }
+
         Trader loggedInUser = (Trader) session.getAttribute("loggedInUser");
         ObjectId ID;
         if (Objects.equals(condition, "baru")) {
-            ID = traderService.jualBarang(namabarang, hargabarang, tipebarang, true, lokasibarang, loggedInUser);
+            ID = traderService.jualBarang(namabarang, harga, tipebarang, true, lokasibarang, loggedInUser);
         } else {
-            ID = traderService.jualBarang(namabarang, hargabarang, tipebarang, false, lokasibarang, loggedInUser);
+            ID = traderService.jualBarang(namabarang, harga, tipebarang, false, lokasibarang, loggedInUser);
         }
 
         Barang barang = barangService.findByID(ID);
@@ -108,7 +117,6 @@ public class TraderController {
         } else {
             return "redirect:/gagalNgiklan";
         }
-
     }
 
     @PostMapping("/Add")
@@ -164,10 +172,14 @@ public class TraderController {
         Trader loggedInUser = (Trader) session.getAttribute("loggedInUser");
         List<Barang> OldMarketPlaceItems = traderService.getAllItemsInMarketPlace(loggedInUser);
 
-        List<Barang> MarketPlaceItems = traderService.searchBarang(OldMarketPlaceItems, search);
 
-        session.setAttribute("MarketPlaceItems", MarketPlaceItems);
-
+        if (!Objects.equals(search, "")) {
+            List<Barang> MarketPlaceItems = traderService.searchBarang(OldMarketPlaceItems, search);
+            session.setAttribute("MarketPlaceItems", MarketPlaceItems);
+        } else {
+            List<Barang> MarketPlaceItems = traderService.getAllItemsInMarketPlace(loggedInUser);
+            session.setAttribute("MarketPlaceItems", MarketPlaceItems);
+        }
         return "redirect:/menu";
     }
 }

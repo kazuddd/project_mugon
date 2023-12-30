@@ -358,7 +358,7 @@
                         <img src="<%= image %>" alt="Produk <%= i + 1 %>">
                     </div>
                     <div>
-                        <a href="../Iklan/iklan.html">
+                        <a
                             <h3><%= item.getNamaBarang() %></h3>
                         </a>
                         <p>Harga: IDR. <%= item.getHarga() %></p>

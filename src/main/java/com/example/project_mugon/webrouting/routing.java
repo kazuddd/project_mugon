@@ -126,5 +126,8 @@ public class routing {
         return "adminEdit";
     }
 
-
+    @GetMapping("/gagalNgiklan")
+    public String  gagalNgiklan() {
+        return "gagalNgiklan";
+    }
 }

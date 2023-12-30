@@ -327,7 +327,7 @@
     </div>
     <div class="profile">
         <a href="/profileadm"> <img src="../asep/profiledef.png" alt="Profil Anda"/></a>
-        <h3>Admin Boli</h3>
+        <h3>${loggedInAdmin.nama}</h3>
     </div>
     <div class="logout">
         <a id="logout" href="/loginadmin">Logout</a>

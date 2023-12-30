@@ -133,10 +133,10 @@
 <img src="../asep/Group 6.png" alt="logo mugon" class="mug-1">
 <div class="apahayo">
 
-    <img src="../asep/Iklanproses.png" alt="mugon besar" class="mug-2">
+    <img src="../asep/iklanGagal.png" alt="mugon besar" class="mug-2">
 
     <div class="next">
-        <a href="/menu">
+        <a href="/jual">
             <button >Next</button>
         </a>
     </div>

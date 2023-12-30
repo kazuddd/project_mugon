@@ -136,7 +136,7 @@
     <img src="../asep/SaldoGacukup.png" alt="mugon besar" class="mug-2">
 
     <div class="next">
-        <a href="/jual">
+        <a href="/keranjang">
             <button >Next</button>
         </a>
     </div>
