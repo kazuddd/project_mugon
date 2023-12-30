@@ -130,4 +130,14 @@ public class routing {
     public String  gagalNgiklan() {
         return "gagalNgiklan";
     }
+
+    @GetMapping("/notifInspek")
+    public String  notifInspek() {
+        return "notifInspek";
+    }
+
+    @GetMapping("/notifAddKeranjang")
+    public String  notifAddKeranjang() {
+        return "notifAddKeranjang";
+    }
 }
