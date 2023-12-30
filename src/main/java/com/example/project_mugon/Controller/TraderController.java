@@ -7,10 +7,7 @@ import com.example.project_mugon.Model.Trader;
 import jakarta.servlet.http.HttpSession;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -38,9 +35,14 @@ public class TraderController {
             // Set session menjadi atribut user yang login
             session.setAttribute("loggedInUser", loggedInUser);
 
-            List<Barang> MarketPlaceItems = traderService.getAllItemsInMarketPlace();
+            List<Barang> MarketPlaceItems = traderService.getAllItemsInMarketPlace(loggedInUser);
+
+            List<Barang> barangKeranjang = traderService.getALlInKeranjang(loggedInUser);
+
 
             session.setAttribute("MarketPlaceItems", MarketPlaceItems);
+
+            session.setAttribute("barangKeranjang", barangKeranjang);
 
             // Redirect ke menu utama jika berhasil
             return "redirect:/menu";
@@ -56,12 +58,18 @@ public class TraderController {
                            @RequestParam("password") String password,
                            HttpSession session) {
         try {
-            // Call the registerTrader method from TraderService
+            // Register trader pada collection Trader lalu login
             Trader newTrader = traderService.registerTrader(nama, email, password);
-
             Trader loggedInUser = traderService.login(email, password);
-            // Optionally, you can set the logged-in user in the session
             session.setAttribute("loggedInUser", newTrader);
+
+            // Pengambilan data pada marketplace yang siap dibeli
+            List<Barang> MarketPlaceItems = traderService.getAllItemsInMarketPlace(loggedInUser);
+            session.setAttribute("MarketPlaceItems", MarketPlaceItems);
+            List<Barang> barangKeranjang = traderService.getALlInKeranjang(loggedInUser);
+            session.setAttribute("barangKeranjang", barangKeranjang);
+
+            // Pengecekan apakah login sukses
             if (loggedInUser != null) {
                 // Redirect kedalam menu jika sukses
                 return "redirect:/menu";
@@ -101,24 +109,23 @@ public class TraderController {
     }
 
     @PostMapping("/Add")
-    public String addToKeranjang(@RequestParam("barangId") ObjectId ID,
-                                 HttpSession session
-                                 ) {
+    public String addToKeranjang(@RequestParam("ItemId") String itemId,
+                                 HttpSession session) {
         Trader loggedInUser = (Trader) session.getAttribute("loggedInUser");
-        Barang barang = barangService.findByID(ID);
 
-        if (barang != null) {
-            traderService.addToKeranjang(ID, loggedInUser);
-        } else {
-            return "GAGAL COK";
-        }
+        ObjectId id = new ObjectId(itemId);
+        Barang barang = barangService.findBy_idMarketPlace(id);
 
-        List<ObjectId> keranjang = loggedInUser.getKeranjang();
-        if (keranjang.contains(ID)) {
-            return "BERHASIL";
-        } else {
-            return "GAGAL";
-        }
+        traderService.addToKeranjang(loggedInUser, itemId);
+
+        Trader updatedTrader = traderService.login(loggedInUser.getEmail(), loggedInUser.getPassword());
+
+        session.setAttribute("loggedInUser", updatedTrader);
+
+        List<Barang> barangKeranjang = traderService.getALlInKeranjang(loggedInUser);
+        session.setAttribute("barangKeranjang", barangKeranjang);
+
+        return "redirect:/menu";
     }
 
     @PostMapping("/UpdateSaldo")
@@ -126,14 +133,38 @@ public class TraderController {
                               HttpSession session
                               ) {
         Trader loggedInUser = (Trader) session.getAttribute("loggedInUser");
-        double cek = loggedInUser.getSaldo();
 
         traderService.tambahSaldo(loggedInUser, amount);
 
-        if (loggedInUser.getSaldo() != cek) {
-            return "Berhasil";
-        } else {
-            return "Gagal";
-        }
+        Trader updatedTrader = traderService.login(loggedInUser.getEmail(), loggedInUser.getPassword());
+
+        session.setAttribute("loggedInUser", updatedTrader);
+
+        return "redirect:/menu";
+    }
+
+    @PostMapping("/Checkout")
+    public String checkoutKeranjang(HttpSession session){
+        Trader loggedInUser = (Trader) session.getAttribute("loggedInUser");
+
+        traderService.checkoutKeranjang(loggedInUser);
+
+        List<Barang> MarketPlaceItems = traderService.getAllItemsInMarketPlace(loggedInUser);
+        session.setAttribute("MarketPlaceItems", MarketPlaceItems);
+
+        return "redirect:/menu";
+    }
+    
+    @GetMapping("/Search")
+    public String searchBarang(@RequestParam("search") String search,
+                               HttpSession session) {
+        Trader loggedInUser = (Trader) session.getAttribute("loggedInUser");
+        List<Barang> OldMarketPlaceItems = traderService.getAllItemsInMarketPlace(loggedInUser);
+
+        List<Barang> MarketPlaceItems = traderService.searchBarang(OldMarketPlaceItems, search);
+
+        session.setAttribute("MarketPlaceItems", MarketPlaceItems);
+
+        return "redirect:/menu";
     }
 }

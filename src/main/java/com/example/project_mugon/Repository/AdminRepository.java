@@ -12,40 +12,6 @@ public interface AdminRepository extends MongoRepository<Admin, String> {
 
     Optional<Admin> findByUsername(String username);
 
-    default Admin saveAdmin(Admin admin) {
-        if (admin != null) {
-            return save(admin);
-        }
-        throw new IllegalArgumentException("Cannot save null Admin");
-    }
-
-    default Admin updateAdmin(Admin admin) {
-        if (admin != null) {
-            ObjectId adminId = admin.get_id(); // Assuming get_id() returns ObjectId
-
-            if (adminId != null && existsById(String.valueOf(adminId))) {
-                return save(admin);
-            }
-            throw new IllegalArgumentException("Cannot update non-existing or null Admin");
-        }
-        throw new IllegalArgumentException("Cannot update null Admin");
-    }
-
-    default void deleteAdmin(Admin admin) {
-        if (admin != null) {
-            delete(admin);
-        } else {
-            throw new IllegalArgumentException("Cannot delete null Admin");
-        }
-    }
-
-    default Admin createAdmin(Admin admin) {
-        if (admin != null) {
-            return save(admin);
-        }
-        throw new IllegalArgumentException("Cannot create null Admin");
-    }
-
     default void deleteBarangInWaitingList(String barangId) {
         if (barangId != null) {
             deleteById(barangId);

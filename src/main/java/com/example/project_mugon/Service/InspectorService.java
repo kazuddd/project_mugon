@@ -8,6 +8,7 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,6 +50,19 @@ public class InspectorService {
         } else {
             throw new IllegalArgumentException("Barang tidak ditemukan dalam WaitingList.");
         }
+    }
+
+    public List<Barang> searchBarang(List<Barang> MarketPlace, String search) {
+        List<Barang> foundItems = new ArrayList<>();
+
+        for (Barang barang : MarketPlace) {
+            // Menggunakan equalsIgnoreCase untuk membandingkan nama barang tanpa memperhatikan case
+            if (barang.getNamaBarang().equalsIgnoreCase(search)) {
+                foundItems.add(barang);
+            }
+        }
+
+        return foundItems;
     }
 
     public List<Barang> getAllItemInWaitingList(){

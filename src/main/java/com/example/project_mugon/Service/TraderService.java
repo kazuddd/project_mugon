@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,14 +77,6 @@ public class TraderService {
 
         return newBarang.get_id();
     }
-    public void addToKeranjang(ObjectId barangID, Trader buyer) {
-        // Update keranjang pembeli
-        List<ObjectId> keranjang = buyer.getKeranjang();
-        keranjang.add(barangID); // Menambahkan ID barang baru kedalam list
-        buyer.setKeranjang(keranjang); // Memanggil method setter untuk update keranjang pada class Buyer
-        traderRepository.updateTrader(buyer); // Update trader dengan keranjang baru ke Database
-
-    }
 
     public void checkoutKeranjang(Trader pembeli) {
         Transaksi newTransaksi = new Transaksi();
@@ -96,40 +89,45 @@ public class TraderService {
         // Iterate melalui setiap ObjectId dalam listBeli
         for (ObjectId barangId : pembeli.getKeranjang()) {
             // Dapatkan informasi Barang berdasarkan ObjectId
-            Barang barang = barangService.findByID(barangId); // Menggunakan service untuk menemukan Barang berdasarkan ID
+            Optional<Barang> barangOptional = barangRepository.findBy_id(barangId);
 
-            // Jika barang ditemukan, tambahkan harganya ke totalHarga
-            if (barang != null) {
+            if (barangOptional.isPresent()) {
+                Barang barang = barangOptional.get();
                 totalHarga += barang.getHarga();
-            } else {
-                System.out.println("\nBARANG DENGAN ID " + barangId + "TIDAK DITEMUKAN");
             }
         }
-
         // Set totalHarga ke newTransaksi
         newTransaksi.setTotalHarga(totalHarga);
 
         // Pengecekan apakah saldo cukup
+
+        List<Barang> barangDiKeranjang = new ArrayList<>();
         if (pembeli.getSaldo() >= totalHarga) {
 
-            List<Barang> semuaBarangKeranjang = barangRepository.findAllBy_idIn(pembeli.getKeranjang());
+            for (ObjectId idBarang : pembeli.getKeranjang()) {
+                Optional<Barang> barangOptional = barangRepository.findBy_id(idBarang);
+                if (barangOptional.isPresent()) {
+                    Barang barang = barangOptional.get();
+                    barangDiKeranjang.add(barang);
+                }
+            }
 
-            // Penambahan saldo penjual
-            semuaBarangKeranjang.forEach(barang -> {
+            // Penambahan Saldo Penjual
+            for (Barang barang : barangDiKeranjang) {
                 ObjectId idPenjual = barang.getIdPenjual();
                 double hargaBarang = barang.getHarga();
 
-                Trader penjual = traderRepository.findBy_id(idPenjual); // Ganti dengan metode yang sesuai untuk menemukan penjual berdasarkan _id
+                Trader penjual = traderRepository.findBy_id(idPenjual);
 
+                // Check if the seller exists and update the balance
                 if (penjual != null) {
-                    double saldoPenjual = penjual.getSaldo();
-                    saldoPenjual += hargaBarang;
+                    double saldoPenjual = penjual.getSaldo() + hargaBarang;
                     penjual.setSaldo(saldoPenjual);
-
-                    traderRepository.save(penjual); // Simpan kembali penjual setelah saldo diperbarui
+                    traderRepository.save(penjual); // Save the updated seller info
                 }
-            });
-            newTransaksi.setListBeli(semuaBarangKeranjang);
+            }
+            // Penambahan List Barang yang dibeli dalam satu transaksi
+            newTransaksi.setListBeli(barangDiKeranjang);
 
             // Tambahkan transaksi ini pada LIST TRANSAKSI pembeli
             List<Transaksi> listT = pembeli.getListTransaksi();
@@ -139,6 +137,11 @@ public class TraderService {
             // Kurangi SALDO pembeli dengan total harga pada transaksi
             pembeli.setSaldo(pembeli.getSaldo() - totalHarga);
 
+            // Delete barang dalam keranjang pada collection barang
+            for (Barang barang : barangDiKeranjang) {
+                barangRepository.delete(barang);
+            }
+
             // Reset keranjang menjadi kosong lagi
             List<ObjectId> newKeranjang = pembeli.getKeranjang();
             List<ObjectId> toDelete = pembeli.getKeranjang();
@@ -146,7 +149,7 @@ public class TraderService {
             pembeli.setKeranjang(newKeranjang);
 
             // Update atribut pembeli
-            traderRepository.updateTrader(pembeli);
+            traderRepository.save(pembeli);
 
             // Hapus semua barang yang dibeli dari repository MarketPlace
             barangRepository.deleteBy_idIn(toDelete);
@@ -165,7 +168,58 @@ public class TraderService {
         System.out.println("\nSALDO BERHASIL DI UPDATE");
     }
 
-    public List<Barang> getAllItemsInMarketPlace() {
-        return barangRepository.findByIsVerifiedTrue();
+    public void addToKeranjang(Trader buyer, String id) {
+        ObjectId itemId = new ObjectId(id);
+        List<ObjectId> keranjang = buyer.getKeranjang();
+
+        if (!keranjang.contains(itemId)) {
+            keranjang.add(itemId);
+            buyer.setKeranjang(keranjang);
+        }
+
+        traderRepository.save(buyer);
+    }
+
+    public List<Barang> getAllItemsInMarketPlace(Trader user) {
+        List<Barang> listBarang = barangRepository.findByIsVerifiedTrue();
+
+        // Iterasi melalui listBarang dan hapus item yang memiliki idPenjual yang sama dengan user._id
+        Iterator<Barang> iterator = listBarang.iterator();
+        while (iterator.hasNext()) {
+            Barang barang = iterator.next();
+            if (barang.getIdPenjual().equals(user.get_id())) {
+                iterator.remove(); // Hapus barang dari listBarang
+            }
+        }
+
+        return listBarang;
+    }
+
+    public List<Barang> getALlInKeranjang(Trader buyer) {
+        List<ObjectId> IdDalamKeranjang = buyer.getKeranjang();
+        List<Barang> barangDiKeranjang = new ArrayList<>();
+
+        for (ObjectId idBarang : IdDalamKeranjang) {
+            Optional<Barang> barangOptional = barangRepository.findBy_id(idBarang);
+            if (barangOptional.isPresent()) {
+                Barang barang = barangOptional.get();
+                barangDiKeranjang.add(barang);
+            }
+        }
+
+        return barangDiKeranjang;
+    }
+
+    public List<Barang> searchBarang(List<Barang> MarketPlace, String search) {
+        List<Barang> foundItems = new ArrayList<>();
+
+        for (Barang barang : MarketPlace) {
+            // Menggunakan equalsIgnoreCase untuk membandingkan nama barang tanpa memperhatikan case
+            if (barang.getNamaBarang().equalsIgnoreCase(search)) {
+                foundItems.add(barang);
+            }
+        }
+
+        return foundItems;
     }
 }

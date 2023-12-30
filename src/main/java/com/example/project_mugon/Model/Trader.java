@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.util.List;
 
@@ -15,7 +16,14 @@ import java.util.List;
 @Document(collection = "Trader")
 public class Trader extends User {
     private String email;
+
+    @Field("keranjang")
     private List<ObjectId> keranjang;
+
     private double saldo;
     private List<Transaksi> listTransaksi;
+
+    public void setKeranjang(List<ObjectId> keranjang) {
+        this.keranjang = keranjang;
+    }
 }

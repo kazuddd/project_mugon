@@ -1,3 +1,5 @@
+<%@ page import="com.example.project_mugon.Model.Barang" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -160,13 +162,12 @@
     }
 
     .iklan-box {
-        width: 30%;
+        width: 70%;
         border: 5px solid #bbb9b9;
         padding: 10px;
         text-align: left;
         background-color: white;
         margin-top: 5%;
-        width: 200px;
         margin-left: 10%;
         box-shadow: 1px 7px 10px 4px grey;
         border-radius: 10px;
@@ -174,8 +175,8 @@
 
     .Checkout {
         display: flex;
-        justify-content: center;
-        align-items: center;
+        flex-direction: column; /* Change to column layout */
+        align-items: flex-end; /* Align items to the right */
         color: white;
     }
 
@@ -183,8 +184,19 @@
         border-radius: 8px;
         background-color: #3F0071;
         padding: 10px 20px;
-        justify-content: center;
+        margin-top: 10px; /* Add margin to separate from the total */
     }
+
+    .total {
+        display: flex;
+        color: white;
+        border-radius: 8px;
+        background-color: #3F0071;
+        width: 200px;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px; /* Add margin at the bottom */
+
 
 
 </style>
@@ -196,8 +208,8 @@
     </div>
     <div class="profile">
         <a href="/profile"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
-        <a href="/topup"><span1>Ridho Udin</span1></a>
-        <a href="/topup"><span2>Rp. 20.000.000</span2></a>
+        <a href="/topup"><span1>${loggedInUser.nama}</span1></a>
+        <a href="/topup"><span2>Rp. ${loggedInUser.nama}</span2></a>
     </div>
     <div class="search-bar">
         <input type="text" placeholder="Cari produk...">
@@ -216,26 +228,38 @@
 <div class="Keranjang-form">
     <img src="../asep/Group 12.png" alt="Gambar Anda" class="mug-2">
     <div class="Keranjang-container">
-        <div class = labelInspek>
+        <div class="labelInspek">
             <h1>KERANJANG KU</h1>
         </div>
+
+        <!-- Looping untuk setiap item dalam list -->
+        <%
+            List<Barang> items = (List<Barang>) session.getAttribute("barangKeranjang");
+            if (items != null) {
+                for (int i = 0; i < items.size(); i++) {
+                    Barang item = items.get(i);
+        %>
+
         <div class="iklan-box">
-            <img src="product1.jpg" alt="Produk 2">
-            <h3>Nama Produk 2</h3>
-            <p>Harga: $50.00</p>
-            <p>Detail: Deskripsi produk ini.</p>
-            <p>Lokasi: Kota Anda</p>
-        </div>
-        <div class="iklan-box">
-            <img src="product1.jpg" alt="Produk 2">
-            <h3>Nama Produk 2</h3>
-            <p>Harga: $50.00</p>
-            <p>Detail: Deskripsi produk ini.</p>
-            <p>Lokasi: Kota Anda</p>
-        </div>
-        <div class="Checkout">
-            <button>CheckOut</button>
+            <h3><%= item.getNamaBarang() %></h3>
+            <p>ID: <%= item.getID() %></p>
+            <p>Harga: <%= item.getHarga() %></p>
+            <p>Rating: <%= item.getKondisi() %></p>
+            <p>Lokasi: <%= item.getLokasi() %></p>
         </div>
 
+        <!-- Akhir dari looping -->
+        <%
+                }
+            }
+        %>
+
+        <form action="/Checkout" method="post">
+            <div class="Checkout">
+                <button type="submit">CheckOut</button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

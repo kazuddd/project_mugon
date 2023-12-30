@@ -26,22 +26,5 @@ public interface TraderRepository extends MongoRepository<Trader, String> {
         throw new IllegalArgumentException("Cannot update non-existing or null Trader");
     }
 
-    // Delete method MongoDB
-    default void deleteTrader(Trader trader) {
-        if (trader != null) {
-            delete(trader);
-        } else {
-            throw new IllegalArgumentException("Cannot delete null Trader");
-        }
-    }
-
-    // Create method MongoDB
-    default Trader createTrader(Trader trader) {
-        if (trader != null) {
-            return save(trader);
-        }
-        throw new IllegalArgumentException("Cannot create null Trader");
-    }
-
     Trader findBy_id(ObjectId idPenjual);
 }
