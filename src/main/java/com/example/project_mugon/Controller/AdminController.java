@@ -44,7 +44,7 @@ public class AdminController {
             return "redirect:/menuadm";
         } else {
             // Redirect jika login gagal
-            return "redirect:/"; // MASIH BINGUNG
+            return "redirect:/gagalLogin"; // MASIH BINGUNG
         }
     }
 

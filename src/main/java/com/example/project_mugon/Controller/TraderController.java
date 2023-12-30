@@ -75,7 +75,7 @@ public class TraderController {
                 // Redirect kedalam menu jika sukses
                 return "redirect:/notifLogin";
             } else {
-                return "redirect:/index";
+                return "redirect:/gagalLogin";
             }
             // Redirect to a success page or URL after successful registration
 
