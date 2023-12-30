@@ -65,7 +65,7 @@ public class InspectorController {
         session.setAttribute("loggedInInspector", loggedInInspector);
 
         if ((cekBarang != null) && (cekBarang.getKondisi() == rating)) {
-            return "redirect:/menuins";
+            return "redirect:/notifInspek";
         } else {
             return "redirect:/";
         }

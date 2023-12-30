@@ -136,7 +136,7 @@ public class TraderController {
         List<Barang> barangKeranjang = traderService.getALlInKeranjang(loggedInUser);
         session.setAttribute("barangKeranjang", barangKeranjang);
 
-        return "redirect:/menu";
+        return "redirect:/notifAddKeranjang";
     }
 
     @PostMapping("/UpdateSaldo")
