@@ -1,3 +1,5 @@
+<%@ page import="com.example.project_mugon.Model.Barang" %>
+<%@ page import="java.util.List" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -340,20 +342,34 @@
 </div>
 
 <main>
+    <%
+        List<Barang> items = (List<Barang>) session.getAttribute("UnverifiedItems");
+        if (items != null) {
+            for (int i = 0; i < items.size(); i++) {
+                Barang item = items.get(i);
+                String image;
+                if (item.getTipeBarang().equals("Tiup")) {
+                    image = "../asep/tiup.jpg";
+                } else if (item.getTipeBarang().equals("Tabuh")) {
+                    image = "../asep/drum.jpg";
+                } else {
+                    image = "../asep/gitar.jpg";
+                }
+
+    %>
     <section class="iklan">
         <div class="iklan-box">
             <div class="isi">
                 <div class="kotakgmbr">
-                    <img src=../asep/iklan.png alt="Produk 1">
+                    <img src="<%= image %>" alt="Produk 1">
                 </div>
                 <div>
-                    <a><h3>Nama Produk 1</h3></a>
-                    <p>Harga: $50.00</p>
-                    <p>Tipe Barang : dawai</p>
-                    <p>Barang baru</p>
-                    <p>Kondisi: Sehat</p>
-                    <p>Lokasi: Kota Anda</p>
-                    <p>penjual:buhahri</p>
+                    <a><h3><%= item.getNamaBarang() %></h3></a>
+                    <p>Harga: $<%= item.getHarga() %></p>
+                    <p>Tipe Barang : <%= item.getTipeBarang() %></p>
+                    <p>isBaru: <%= item.isBaru() %></p>
+                    <p>Lokasi: <%= item.getLokasi() %></p>
+                    <p>ID Penjual: <%= item.getIdPenjual() %></p>
                 </div>
             </div>
             <div class="ratedelete">
@@ -363,14 +379,26 @@
                     </div>
                 </div>
                 <div class="deletebutton">
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <!-- Form for Edit -->
+                    <form action="/admin/toEditPage" method="post">
+                        <input type="hidden" name="barangId" value=<%= item.getID() %>>
+                        <button type="submit">Edit</button>
+                    </form>
+
+                    <!-- Form for Delete -->
+                    <form action="/admin/delete" method="post">
+                        <input type="hidden" name="barangId" value=<%= item.getID() %>>
+                        <button type="submit">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
         <!-- Tambahkan lebih banyak iklan box sesuai kebutuhan -->
     </section>
-
+    <%
+            } // End of for loop
+        }
+    %>
 
 </main>
 

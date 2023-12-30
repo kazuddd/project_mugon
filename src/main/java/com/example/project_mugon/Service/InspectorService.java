@@ -35,7 +35,7 @@ public class InspectorService {
         return null;
     }
 
-    public void verifyBarang(ObjectId barangId, double ratingKondisi) {
+    public void verifyBarang(Inspector inspector, ObjectId barangId, double ratingKondisi) {
         Optional<Barang> barangOptional = barangRepository.findBy_id(barangId);
 
         if (barangOptional.isPresent()) {
@@ -47,6 +47,10 @@ public class InspectorService {
 
             // Pindahkan barang ke MarketPlace
             barangRepository.save(selectedBarang);
+
+            // Tambahkan total inspect
+            inspector.setTotalInspect(inspector.getTotalInspect() + 1);
+            inspectorRepository.save(inspector);
         } else {
             throw new IllegalArgumentException("Barang tidak ditemukan dalam WaitingList.");
         }

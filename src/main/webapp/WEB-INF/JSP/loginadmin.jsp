@@ -141,7 +141,7 @@
         <a style="color: black;" href="#">Admin</a>
     </div>
     <hr>
-    <form class="login-form" action="#">
+    <form class="login-form" action="/admin/login" method="post">
         <label for="Username"></label>
         <input type="text" id="username" name="username" required placeholder="Username">
 

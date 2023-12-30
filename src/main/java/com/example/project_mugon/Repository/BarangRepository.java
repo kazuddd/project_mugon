@@ -23,4 +23,6 @@ public interface BarangRepository extends MongoRepository<Barang, String> {
     List<Barang> findAllBy_idIn(List<ObjectId> objectIds);
 
     void deleteBy_idIn(List<ObjectId> objectIds);
+
+    void deleteBy_id(ObjectId _id);
 }

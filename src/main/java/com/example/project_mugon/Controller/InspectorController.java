@@ -3,6 +3,7 @@ package com.example.project_mugon.Controller;
 import ch.qos.logback.core.model.Model;
 import com.example.project_mugon.Model.Barang;
 import com.example.project_mugon.Model.Inspector;
+import com.example.project_mugon.Model.Trader;
 import com.example.project_mugon.Service.BarangService;
 import com.example.project_mugon.Service.InspectorService;
 import jakarta.servlet.http.HttpSession;
@@ -51,12 +52,17 @@ public class InspectorController {
 
     @PostMapping("submitRating")
     public String rateBarang(@RequestParam("itemId") String itemId,
-                             @RequestParam("rating") double rating) {
+                             @RequestParam("rating") double rating,
+                             HttpSession session) {
 
         ObjectId id = new ObjectId(itemId);
 
-        inspectorService.verifyBarang(id, rating);
+        Inspector loggedInInspector = (Inspector) session.getAttribute("loggedInInspector");
+
+        inspectorService.verifyBarang(loggedInInspector, id, rating);
         Barang cekBarang = barangService.findBy_idMarketPlace(id);
+
+        session.setAttribute("loggedInInspector", loggedInInspector);
 
         if ((cekBarang != null) && (cekBarang.getKondisi() == rating)) {
             return "redirect:/menuins";

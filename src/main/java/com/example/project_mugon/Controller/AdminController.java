@@ -1,21 +1,25 @@
 package com.example.project_mugon.Controller;
 
 import com.example.project_mugon.Model.Admin;
+import com.example.project_mugon.Model.Barang;
 import com.example.project_mugon.Service.AdminService;
 import jakarta.servlet.http.HttpSession;
+import org.bson.types.ObjectId;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/loginadmin")
+@RequestMapping("/admin")
 public class AdminController {
     private final AdminService adminService;
 
     public AdminController(AdminService adminService){this.adminService = adminService;}
 
-    //@PostMapping("/loginAdmin")
+    @PostMapping("/login")
     public String login(@RequestParam("username") String username,
                         @RequestParam("password") String password,
                         HttpSession session){
@@ -27,11 +31,40 @@ public class AdminController {
             // Set session menjadi atribut inspector yang login
             session.setAttribute("loggedInAdmin", loggedInAdmin);
 
+            // Ambil data marketplace
+            List<Barang> MarketPlaceItems = adminService.getAllItemsInMarketPlace();
+            session.setAttribute("MarketPlaceItems", MarketPlaceItems);
+
+            // Ambil data unverified
+            List<Barang> UnverifiedItems = adminService.getAllItemsInWaitingList();
+            session.setAttribute("UnverifiedItems", UnverifiedItems);
+
             // Redirect ke menu utama jika berhasil
-            return "redirect:/menuadmin";
+            return "redirect:/menuadm";
         } else {
             // Redirect jika login gagal
             return "redirect:/"; // MASIH BINGUNG
         }
+    }
+
+    @PostMapping("/delete")
+    public String delete(@RequestParam("barangId") String id,
+                       HttpSession session){
+        ObjectId ID = new ObjectId(id);
+
+        adminService.deleteFromBarangCollection(ID);
+
+        // Ambil data marketplace
+        List<Barang> MarketPlaceItems = adminService.getAllItemsInMarketPlace();
+        session.setAttribute("MarketPlaceItems", MarketPlaceItems);
+
+        return "redirect:/menuadm";
+    }
+
+    @PostMapping("toEditPage")
+    public String edit(@RequestParam("barangId") String id, HttpSession session) {
+        session.setAttribute("id", id);
+
+        return "redirect:/menuadm";
     }
 }

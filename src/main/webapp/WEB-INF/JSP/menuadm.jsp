@@ -1,3 +1,8 @@
+<%@ page import="com.example.project_mugon.Model.Barang" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.project_mugon.Model.Trader" %>
+<%@ page import="org.bson.types.ObjectId" %>
+<%@ page import="com.example.project_mugon.Repository.TraderRepository" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -328,7 +333,7 @@
     </div>
     <div class="profile">
         <a href="/profileadm"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
-        <h3>Admin Boli</h3>
+        <h3>${loggedInAdmin.nama}</h3>
     </div>
     <div class="logout">
         <a id="logout" href="/loginadmin">Logout</a>
@@ -344,20 +349,36 @@
 
 <main>
 
+    <%
+        List<Barang> items = (List<Barang>) session.getAttribute("MarketPlaceItems");
+        if (items != null) {
+            for (int i = 0; i < items.size(); i++) {
+                Barang item = items.get(i);
+                String image;
+                if (item.getTipeBarang().equals("Tiup")) {
+                    image = "../asep/tiup.jpg";
+                } else if (item.getTipeBarang().equals("Tabuh")) {
+                    image = "../asep/drum.jpg";
+                } else {
+                    image = "../asep/gitar.jpg";
+                }
+
+    %>
     <section class="iklan">
         <div class="iklan-box">
             <div class="isi">
                 <div class="kotakgmbr">
-                    <img src=../asep/iklan.png alt="Produk 1">
+                    <img src="<%= image %>" alt="Produk <%= i+1 %>">
                 </div>
                 <div>
-                    <a><h3>Nama Produk 1</h3></a>
-                    <p>Harga: $50.00</p>
-                    <p>Tipe Barang : dawai</p>
-                    <p>Barang baru</p>
-                    <p>Kondisi: Sehat</p>
-                    <p>Lokasi: Kota Anda</p>
-                    <p>penjual:buhahri</p>
+                    <a><h3><%= item.getNamaBarang() %></h3></a>
+                    <p>Harga: $<%= item.getHarga() %></p>
+                    <p>Tipe Barang: <%= item.getTipeBarang() %></p>
+                    <p>isBaru: <%= item.isBaru() %></p>
+                    <p>Kondisi: <%= item.getKondisi() %></p>
+                    <p>Lokasi: <%= item.getLokasi() %></p>
+                    <p>ID penjual: <%= item.getIdPenjual() %></p>
+                    <!-- Add other properties as needed -->
                 </div>
             </div>
             <div class="ratedelete">
@@ -367,13 +388,25 @@
                     </div>
                 </div>
                 <div class="deletebutton">
-                    <button>Edit</button>
-                    <button>Delete</button>
+                    <!-- Form for Edit -->
+                    <form action="/admin/toEditPage" method="post">
+                        <input type="hidden" name="barangId" value=<%= item.getID() %>>
+                        <button type="submit">Edit</button>
+                    </form>
+
+                    <!-- Form for Delete -->
+                    <form action="/admin/delete" method="post">
+                        <input type="hidden" name="barangId" value=<%= item.getID() %>>
+                        <button type="submit">Delete</button>
+                    </form>
                 </div>
             </div>
         </div>
-        <!-- Tambahkan lebih banyak iklan box sesuai kebutuhan -->
     </section>
+    <%
+            } // End of for loop
+        }
+    %>
 
 
 
