@@ -89,12 +89,12 @@ public class TraderController {
                              @RequestParam("hargabarang") double hargabarang,
                              @RequestParam("lokasibarang") String lokasibarang,
                              @RequestParam("tipebarang") String tipebarang,
-                             @RequestParam("baru/bekas") String barubekas,
+                             @RequestParam("condition") String barubekas,
                              HttpSession session) {
 
         Trader loggedInUser = (Trader) session.getAttribute("loggedInUser");
         boolean isBaru = false;
-        if (barubekas == "Baru") {
+        if (barubekas == "baru") {
             isBaru = true;
         }
         ObjectId ID = traderService.jualBarang(namabarang, hargabarang, tipebarang, isBaru, lokasibarang, loggedInUser);

@@ -9,16 +9,6 @@
 </head>
 
 <style>
-
-    @import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap');
-
-    body {
-        font-family: 'Josefin Sans', sans-serif;
-        margin: 0;
-        padding: 0;
-        font-weight: bold;
-    }
-
     .profil-form {
         display: flex;
         justify-content: space-between;
@@ -170,29 +160,17 @@
 
 </style>
 
-
-
-
-
 <body class="h-[100vh] bg-gradient-to-b from-[#3F0071] to-[#150050]">
 <div class="Menu">
     <div class="logo">
-        <a href="/menu"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
+        <a href="/menuadm"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
     </div>
     <div class="profile">
-        <a href="/profile"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
-        <a href="/topup"><span1>Ridho Udin</span1></a>
-        <a href="/topup"><span2>Rp. 20.000.000</span2></a>
+        <img src="../asep/profile.png" alt="Profil Anda">
+        <span1>Admin Boli</span1>
     </div>
-    <div class="search-bar">
-        <input type="text" placeholder="Cari produk...">
-    </div>
-    <div class="cart">
-        <a href="/keranjang"><img src="../asep/keranjang.png" alt="Keranjang Belanja"/></a>
-    </div>
-
     <div class="logout">
-        <a id="logout" href="/">Logout</a>
+        <a id="logout" href="/loginadmin">Logout</a>
     </div>
 </div>
 
@@ -209,17 +187,11 @@
             </div>
             <div>
                 <button>Biodata diri</button>
-                <p>Nama : Ridho Udin</p>
+                <p>Nama : Admin Boli</p>
                 <p>Id : 1301212323</p>
                 <p>Alamat : Jalan-Jalan Bandung</p>
                 <p>Email : Bolioceannananana@gmail.com</p>
             </div>
-            <div class="histori">
-                <a href="/histori">Histori</a>
-            </div>
-
-
-
         </div>
 </body>
 </html>

@@ -8,7 +8,6 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300&display=swap">
 </head>
 
-
 <style>
 
     /* Styling header */
@@ -319,8 +318,6 @@
 </style>
 
 
-
-
 <body>
 <div class="Menu">
     <div class="logo">
@@ -338,12 +335,11 @@
 <hr>
 
 <div class = labeladmin>
-    <a style="color: black;" href="#">Verified</a>
-    <a style="color: silver;" href="/menuadmunv">Unverified</a>
+    <a style="color: silver;" href="/menuadm">Verified</a>
+    <a style="color: black;" href="#">Unverified</a>
 </div>
 
 <main>
-
     <section class="iklan">
         <div class="iklan-box">
             <div class="isi">
@@ -374,8 +370,6 @@
         </div>
         <!-- Tambahkan lebih banyak iklan box sesuai kebutuhan -->
     </section>
-
-
 
 
 </main>

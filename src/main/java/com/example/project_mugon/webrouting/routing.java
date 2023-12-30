@@ -35,6 +35,11 @@ public class routing {
         return "menuadm";
     }
 
+    @GetMapping("/menuadmunv")
+    public String menuadmunv() {
+        return "menuadmunv";
+    }
+
     @GetMapping("/menuins")
     public String menuins() {
         return "menuins";
@@ -70,4 +75,30 @@ public class routing {
     public String jual() {
         return "jual";
     }
+
+    @GetMapping("/histori")
+    public String  histori() {
+        return "histori";
+    }
+
+    @GetMapping("/notifLogin")
+    public String  notifLogin() {
+        return "notifLogin";
+    }
+
+    @GetMapping("/notifLoginins")
+    public String  notifLoginins() {
+        return "notifLoginins";
+    }
+
+    @GetMapping("/notifLoginadm")
+    public String  notifLoginadm() {
+        return "notifLoginadm";
+    }
+
+    @GetMapping("/notifTrans")
+    public String  notifTrans() {
+        return "notifTrans";
+    }
+
 }

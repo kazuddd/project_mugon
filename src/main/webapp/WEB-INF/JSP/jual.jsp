@@ -243,6 +243,59 @@
         margin-top: 15px;
     }
 
+    .container1-radio {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 90px;
+        gap: 10px;
+        padding-left: 15%;
+    }
+    .container1-radio label {
+        justify-content: center;
+
+    }
+
+    .container1-radio input {
+        justify-content: center;
+        height: 26px;
+    }
+
+    .container1-radio div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 50px;
+
+    }
+
+    .container12-radio {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        width: 90px;
+        gap: 10px;
+        padding-left: 10%;
+    }
+    .container12-radio label {
+        justify-content: center;
+
+    }
+
+    .container12-radio input {
+        justify-content: center;
+        height: 26px;
+    }
+
+    .container12-radio div {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 50px;
+
+    }
+
+
 
 </style>
 
@@ -258,7 +311,7 @@
     <div class="profile">
         <a href="/profile"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
         <a href="/topup"><span1>${loggedInUser.nama}</span1></a>
-        <a href="/topup"><span2>Rp. ${loggedInUser.nama}</span2></a>
+        <a href="/topup"><span2>Rp. ${loggedInUser.saldo}</span2></a>
     </div>
     <div class="search-bar">
         <input type="text" placeholder="Cari produk...">
@@ -302,14 +355,39 @@
                         <input type="text" id="lokasibarang" name="lokasibarang" required placeholder="Lokasi Barang">
                     </div>
                 </div>
-                <div class="container1">
+
+                <div class="container12-radio">
                     <div>
-                        <input type="text" id="tipebarang" name="tipebarang" required placeholder="Tipe Barang">
+
+                        <input type="radio" id="tipebarang" name="tipebarang" required placeholder="Tipe Barang" value="Tiup">
+                        <label for="baru">Tiup</label>
+                    </div>
+
+                    <div>
+
+                        <input type="radio" id="tipebarang" name="tipebarang" required placeholder="Tipe Barang" value="Petik">
+                        <label for="baru">Petik</label>
+                    </div>
+
+                    <div>
+
+                        <input type="radio" id="tipebarang" name="tipebarang" required placeholder="Tipe Barang" value="Tabuh">
+                        <label for="bekas">Tabuh</label>
                     </div>
                 </div>
-                <div class="container1">
+
+
+                <div class="container1-radio">
                     <div>
-                        <input type="text" id="baru/bekas" name="baru/bekas" required placeholder="baru/bekas">
+
+                        <input type="radio" id="baru" name="condition" value="baru" required>
+                        <label for="baru">Baru</label>
+                    </div>
+
+                    <div>
+
+                        <input type="radio" id="bekas" name="condition" value="bekas" required>
+                        <label for="bekas">Bekas</label>
                     </div>
                 </div>
                 <div class="container1">

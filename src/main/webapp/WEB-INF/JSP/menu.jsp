@@ -341,8 +341,8 @@
     </div>
 
     <div class="profile">
-        <a href="../Profile/Profile.html"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
-        <a href="../Topup/Topup.html"><span1>${loggedInUser.nama}</span1></a>
+        <a href="/profile"> <img src="../asep/profiledef.png" alt="Profil Anda"/></a>
+        <a href="/topup"><span1>${loggedInUser.nama}</span1></a>
         <a href="/topup"><span2>Rp. ${loggedInUser.saldo}</span2></a>
     </div>
     <div class="search-bar">
