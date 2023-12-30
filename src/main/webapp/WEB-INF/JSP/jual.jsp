@@ -309,7 +309,7 @@
         <a href="/menu"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
     </div>
     <div class="profile">
-        <a href="/profile"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
+        <a href="/profile"> <img src="../asep/profiledef.png" alt="Profil Anda"/></a>
         <a href="/topup"><span1>${loggedInUser.nama}</span1></a>
         <a href="/topup"><span2>Rp. ${loggedInUser.saldo}</span2></a>
     </div>
@@ -379,15 +379,12 @@
 
                 <div class="container1-radio">
                     <div>
-
-                        <input type="radio" id="baru" name="condition" value="baru" required>
-                        <label for="baru">Baru</label>
+                        <input type="radio" id="condition-baru" name="condition" value="baru" required>
+                        <label for="condition-baru">Baru (New)</label>
                     </div>
-
                     <div>
-
-                        <input type="radio" id="bekas" name="condition" value="bekas" required>
-                        <label for="bekas">Bekas</label>
+                        <input type="radio" id="condition-bekas" name="condition" value="bekas" required>
+                        <label for="condition-bekas">Bekas (Used)</label>
                     </div>
                 </div>
                 <div class="container1">

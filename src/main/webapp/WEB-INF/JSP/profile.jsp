@@ -153,11 +153,17 @@
 
     .gambar{
         height: 200px;
+        width: 200px;
         display: flex;
         gap:10px;
         flex-direction: column;
         background-color: rgb(194, 189, 189);
         border: 1px solid black;
+    }
+
+    .gambar img{
+        height: 200px;
+        width: 200px;
     }
 
     .ContainerHistori {
@@ -170,56 +176,50 @@
 
 </style>
 
-
-
-
-
 <body class="h-[100vh] bg-gradient-to-b from-[#3F0071] to-[#150050]">
-<div class="Menu">
-    <div class="logo">
-        <a href="/menu"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
-    </div>
-    <div class="profile">
-        <a href="/profile"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
-        <a href="/topup"><span1>Ridho Udin</span1></a>
-        <a href="/topup"><span2>Rp. 20.000.000</span2></a>
-    </div>
-    <div class="search-bar">
-        <input type="text" placeholder="Cari produk...">
-    </div>
-    <div class="cart">
-        <a href="/keranjang"><img src="../asep/keranjang.png" alt="Keranjang Belanja"/></a>
-    </div>
-
-    <div class="logout">
-        <a id="logout" href="/">Logout</a>
-    </div>
-</div>
-
-
-<div class="profilAd-form">
-    <img src="../asep/Group 12.png" alt="Gambar Anda" class="mug-2">
-    <div class="profileAd-container">
-        <div class="biodata">
-            <div class="gambar">
-                <div>
-                    <img src="../asep/Buhahri.jpg" alt="Buhahri.jpg">
-                </div>
-                <button class="bg-purple-900 text-white rounded-[30px] mt-1">Pilih Foto</button>
-            </div>
-            <div>
-                <button>Biodata diri</button>
-                <p>Nama : Ridho Udin</p>
-                <p>Id : 1301212323</p>
-                <p>Alamat : Jalan-Jalan Bandung</p>
-                <p>Email : Bolioceannananana@gmail.com</p>
-            </div>
-            <div class="histori">
-                <a href="/histori">Histori</a>
-            </div>
-
-
-
+    <div class="Menu">
+        <div class="logo">
+            <a href="/menu"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
         </div>
+        <div class="profile">
+            <a href="/profile"> <img src="../asep/profiledef.png" alt="Profil Anda"/></a>
+            <a href="/topup"><span1>${loggedInUser.nama}</span1></a>
+            <a href="/topup"><span2>Rp. ${loggedInUser.saldo}</span2></a>
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Cari produk...">
+        </div>
+        <div class="cart">
+            <a href="/keranjang"><img src="../asep/keranjang.png" alt="Keranjang Belanja"/></a>
+        </div>
+
+        <div class="logout">
+            <a id="logout" href="/">Logout</a>
+        </div>
+    </div>
+
+
+    <div class="profilAd-form">
+        <img src="../asep/Group 12.png" alt="Gambar Anda" class="mug-2">
+        <div class="profileAd-container">
+            <div class="biodata">
+                <div class="gambar">
+                    <div>
+                        <img src="../asep/profiledef.png" alt="Buhahri.jpg">
+                    </div>
+                    <button class="bg-purple-900 text-white rounded-[30px] mt-1">Pilih Foto</button>
+                </div>
+                <div>
+                    <button>Biodata diri</button>
+                    <p>Nama : ${loggedInUser.nama}</p>
+                    <p>Id : ${loggedInUser._id}</p>
+                    <p>Email : ${loggedInUser.email}</p>
+                </div>
+                <div class="histori">
+                    <a href="/histori">Histori</a>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

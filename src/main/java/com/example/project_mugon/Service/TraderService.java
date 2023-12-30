@@ -82,7 +82,6 @@ public class TraderService {
         Transaksi newTransaksi = new Transaksi();
 
         newTransaksi.setUsernamePembeli(pembeli.get_id());
-
         // Inisialisasi total harga
         double totalHarga = 0.0;
 

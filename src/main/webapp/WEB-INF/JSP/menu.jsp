@@ -369,7 +369,17 @@
         <div class="iklan-box">
             <div class="isi">
                 <div class="kotakgmbr">
-                    <img src="../asep/iklan.png" alt="Produk <%= i + 1 %>">
+                    <%
+                        String image;
+                        if (item.getTipeBarang().equals("Tiup")) {
+                            image = "../asep/tiup.jpg";
+                        } else if (item.getTipeBarang().equals("Tabuh")) {
+                            image = "../asep/drum.jpg";
+                        } else {
+                            image = "../asep/gitar.jpg";
+                        }
+                    %>
+                    <img src="<%= image %>" alt="Produk <%= i + 1 %>">
                 </div>
                 <div>
                     <a href="../Iklan/iklan.html">

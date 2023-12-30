@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -45,7 +46,7 @@ public class TraderController {
             session.setAttribute("barangKeranjang", barangKeranjang);
 
             // Redirect ke menu utama jika berhasil
-            return "redirect:/menu";
+            return "redirect:/notifLogin";
         } else {
             // Redirect jika login gagal
             return "redirect:/daftar"; // MASIH BINGUNG
@@ -89,15 +90,17 @@ public class TraderController {
                              @RequestParam("hargabarang") double hargabarang,
                              @RequestParam("lokasibarang") String lokasibarang,
                              @RequestParam("tipebarang") String tipebarang,
-                             @RequestParam("condition") String barubekas,
+                             @RequestParam("condition") String condition,
                              HttpSession session) {
 
         Trader loggedInUser = (Trader) session.getAttribute("loggedInUser");
-        boolean isBaru = false;
-        if (barubekas == "baru") {
-            isBaru = true;
+        ObjectId ID;
+        if (Objects.equals(condition, "baru")) {
+            ID = traderService.jualBarang(namabarang, hargabarang, tipebarang, true, lokasibarang, loggedInUser);
+        } else {
+            ID = traderService.jualBarang(namabarang, hargabarang, tipebarang, false, lokasibarang, loggedInUser);
         }
-        ObjectId ID = traderService.jualBarang(namabarang, hargabarang, tipebarang, isBaru, lokasibarang, loggedInUser);
+
         Barang barang = barangService.findByID(ID);
 
         if (barang != null){
@@ -152,7 +155,7 @@ public class TraderController {
         List<Barang> MarketPlaceItems = traderService.getAllItemsInMarketPlace(loggedInUser);
         session.setAttribute("MarketPlaceItems", MarketPlaceItems);
 
-        return "redirect:/menu";
+        return "redirect:/notifTrans";
     }
     
     @GetMapping("/Search")

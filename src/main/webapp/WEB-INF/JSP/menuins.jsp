@@ -303,8 +303,9 @@
         <a href="/menuins"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
     </div>
     <div class="profile">
-        <a href="/profileins"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
+        <a href="/profileins"> <img src="../asep/profiledef.png" alt="Profil Anda"/></a>
         <h3>${loggedInInspector.nama}</h3>
+        <h3>Total inspect: ${loggedInInspector.totalInspect}</h3>
     </div>
     <div class="logout">
         <a id="logout" href="/logininspektor">Logout</a>
@@ -329,7 +330,17 @@
             <div class="iklan-box">
                 <div class="isi">
                     <div class="kotakgmbr">
-                        <img src="../asep/iklan.png" alt="Produk <%= i + 1 %>">
+                        <%
+                            String image;
+                            if (item.getTipeBarang().equals("Tiup")) {
+                                image = "../asep/tiup.jpg";
+                            } else if (item.getTipeBarang().equals("Tabuh")) {
+                                image = "../asep/drum.jpg";
+                            } else {
+                                image = "../asep/gitar.jpg";
+                            }
+                        %>
+                        <img src="<%= image %>" alt="Produk <%= i + 1 %>">
                     </div>
                     <div>
                         <a href="../Iklan/iklan.html">

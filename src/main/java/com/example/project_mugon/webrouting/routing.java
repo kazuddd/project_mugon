@@ -77,12 +77,12 @@ public class routing {
     }
 
     @GetMapping("/histori")
-    public String  histori() {
+    public String histori() {
         return "histori";
     }
 
     @GetMapping("/notifLogin")
-    public String  notifLogin() {
+    public String notifLogin() {
         return "notifLogin";
     }
 

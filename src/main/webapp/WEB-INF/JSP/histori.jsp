@@ -1,3 +1,7 @@
+<%@ page import="com.example.project_mugon.Model.Transaksi" %>
+<%@ page import="java.util.List" %>
+<%@ page import="com.example.project_mugon.Model.Trader" %>
+<%@ page import="com.example.project_mugon.Model.Barang" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -236,9 +240,9 @@
         <a href="/menu"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
     </div>
     <div class="profile">
-        <a href="/profile"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
-        <a href="/topup"><span1>Ridho Udin</span1></a>
-        <a href="/topup"><span2>Rp. 20.000.000</span2></a>
+        <a href="/profile"> <img src="../asep/profiledef.png" alt="Profil Anda"/></a>
+        <a href="/topup"><span1>${loggedInUser.nama}</span1></a>
+        <a href="/topup"><span2>Rp. ${loggedInUser.saldo}</span2></a>
     </div>
     <div class="search-bar">
         <input type="text" placeholder="Cari produk...">
@@ -265,58 +269,43 @@
             <h1>Riwayat Pembelian</h1>
         </div>
         <div class="KotakID">
+            <%
+                Trader trader = (Trader) session.getAttribute("loggedInUser");
+                List<Transaksi> LT = trader.getListTransaksi();
+                if (LT != null) {
+                    for (Transaksi transaksi : LT) {
+            %>
             <div class="ID">
-                <p> ID : </p>
+                <% for (Barang item : transaksi.getListBeli()) { %>
+                <%
+                    String image;
+                    if (item.getTipeBarang().equals("Tiup")) {
+                        image = "../asep/tiup.jpg";
+                    } else if (item.getTipeBarang().equals("Tabuh")) {
+                        image = "../asep/drum.jpg";
+                    } else {
+                        image = "../asep/gitar.jpg";
+                    }
+                %>
                 <div class="iklan-box">
-                    <img src="product1.jpg" alt="Produk 2">
-                    <h3>Nama Produk 2</h3>
-                    <p>Harga: $50.00</p>
-                    <p>Detail: Deskripsi produk ini.</p>
-                    <p>Lokasi: Kota Anda</p>
+                    <img src="<%= image %>" alt="Produk <%= item.get_id() %>">
+                    <h3><%= item.getNamaBarang() %></h3>
+                    <p>Harga: <%= item.getHarga() %></p>
+                    <p>Tipe barang: <%= item.getTipeBarang() %></p>
+                    <p>Lokasi: <%= item.getLokasi() %></p>
                 </div>
-                <div class="iklan-box">
-                    <img src="product1.jpg" alt="Produk 2">
-                    <h3>Nama Produk 2</h3>
-                    <p>Harga: $50.00</p>
-                    <p>Detail: Deskripsi produk ini.</p>
-                    <p>Lokasi: Kota Anda</p>
-                </div>
-
+                <% } %>
                 <div class="Checkout">
                     <div class="total">
-                        <p> Total Harga: xxx</p>
+                        <p>Total Harga: <%= transaksi.getTotalHarga() %></p>
                     </div>
                 </div>
-
             </div>
-
-            <div class="ID">
-                <p> ID : </p>
-                <div class="iklan-box">
-                    <img src="product1.jpg" alt="Produk 2">
-                    <h3>Nama Produk 2</h3>
-                    <p>Harga: $50.00</p>
-                    <p>Detail: Deskripsi produk ini.</p>
-                    <p>Lokasi: Kota Anda</p>
-                </div>
-
-                <div class="Checkout">
-                    <div class="total">
-                        <p> Total Harga: xxx</p>
-                    </div>
-                </div>
-
-            </div>
-
+            <%
+                    }
+                }
+            %>
         </div>
-
-        <br>
-        <br>
-
-
-
-
-
     </div>
 </div>
 
