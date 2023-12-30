@@ -144,7 +144,18 @@
         width: 200px;
         margin-bottom: 50px;
         position: absolute;
-        top: 30%;
+        top: 20%;
+        left: 80%;
+        z-index: 4;
+        font-size: 20px;
+        font-family: 'Josefin Sans', sans-serif;
+    }
+
+    .profins h3{
+        width: 200px;
+        margin-bottom: 50px;
+        position: absolute;
+        top: 40%;
         left: 80%;
         z-index: 4;
         font-size: 20px;
@@ -305,8 +316,12 @@
     <div class="profile">
         <a href="/profileins"> <img src="../asep/profiledef.png" alt="Profil Anda"/></a>
         <h3>${loggedInInspector.nama}</h3>
+    </div>
+
+    <div class="profins">
         <h3>Total inspect: ${loggedInInspector.totalInspect}</h3>
     </div>
+
     <div class="logout">
         <a id="logout" href="/logininspektor">Logout</a>
     </div>
