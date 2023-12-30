@@ -78,7 +78,7 @@ public class TraderService {
         return newBarang.get_id();
     }
 
-    public void checkoutKeranjang(Trader pembeli) {
+    public String checkoutKeranjang(Trader pembeli) {
         Transaksi newTransaksi = new Transaksi();
 
         newTransaksi.setUsernamePembeli(pembeli.get_id());
@@ -152,8 +152,10 @@ public class TraderService {
 
             // Hapus semua barang yang dibeli dari repository MarketPlace
             barangRepository.deleteBy_idIn(toDelete);
+            return "redirect:/notifTrans";
         } else {
             System.out.println("SALDO TIDAK CUKUP");
+            return "redirect:/gagalCekot";
         }
     }
 

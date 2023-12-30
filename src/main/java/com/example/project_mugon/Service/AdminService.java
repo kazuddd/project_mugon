@@ -60,8 +60,9 @@ public class AdminService {
         barangRepository.deleteBy_id(IdBarang);
     }
 
-    public void editBarangInMarketPlace(ObjectId IdBarang, String namaBarang, String tipeBarang, String lokasi) {
-        Optional<Barang> barangOptional = barangRepository.findBy_id(IdBarang);
+    public void editBarangInMarketPlace(String IdBarang, String namaBarang, String tipeBarang, String lokasi) {
+        ObjectId id = new ObjectId(IdBarang);
+        Optional<Barang> barangOptional = barangRepository.findBy_id(id);
 
         barangOptional.ifPresent(barang -> {
             barang.setNamaBarang(namaBarang);

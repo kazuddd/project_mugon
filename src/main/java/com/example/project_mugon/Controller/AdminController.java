@@ -2,6 +2,7 @@ package com.example.project_mugon.Controller;
 
 import com.example.project_mugon.Model.Admin;
 import com.example.project_mugon.Model.Barang;
+import com.example.project_mugon.Model.Inspector;
 import com.example.project_mugon.Service.AdminService;
 import jakarta.servlet.http.HttpSession;
 import org.bson.types.ObjectId;
@@ -62,8 +63,23 @@ public class AdminController {
     }
 
     @PostMapping("toEditPage")
-    public String edit(@RequestParam("barangId") String id, HttpSession session) {
+    public String toEdit(@RequestParam("barangId") String id, HttpSession session) {
         session.setAttribute("id", id);
+
+        return "redirect:/adminEdit";
+    }
+
+    @PostMapping("/AdminEdit")
+    public String edit(@RequestParam("namabarang") String namaBarang,
+                       @RequestParam("lokasibarang") String lokasi,
+                       @RequestParam("tipebarang") String tipe,
+                       HttpSession session) {
+        String id = (String) session.getAttribute("id");
+
+        adminService.editBarangInMarketPlace(id, namaBarang, tipe, lokasi);
+
+        List<Barang> MarketPlaceItems = adminService.getAllItemsInMarketPlace();
+        session.setAttribute("MarketPlaceItems", MarketPlaceItems);
 
         return "redirect:/menuadm";
     }

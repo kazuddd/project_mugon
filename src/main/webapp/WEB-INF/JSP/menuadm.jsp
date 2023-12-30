@@ -332,7 +332,7 @@
         <a href="/menuadm"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
     </div>
     <div class="profile">
-        <a href="/profileadm"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
+        <a href="/profileadm"> <img src="../asep/profiledef.png" alt="Profil Anda"/></a>
         <h3>${loggedInAdmin.nama}</h3>
     </div>
     <div class="logout">

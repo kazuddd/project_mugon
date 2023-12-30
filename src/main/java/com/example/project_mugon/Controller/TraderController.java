@@ -49,7 +49,7 @@ public class TraderController {
             return "redirect:/notifLogin";
         } else {
             // Redirect jika login gagal
-            return "redirect:/daftar"; // MASIH BINGUNG
+            return "redirect:/gagalLogin"; // MASIH BINGUNG
         }
     }
 
@@ -73,7 +73,7 @@ public class TraderController {
             // Pengecekan apakah login sukses
             if (loggedInUser != null) {
                 // Redirect kedalam menu jika sukses
-                return "redirect:/menu";
+                return "redirect:/notifLogin";
             } else {
                 return "redirect:/index";
             }
@@ -104,9 +104,9 @@ public class TraderController {
         Barang barang = barangService.findByID(ID);
 
         if (barang != null){
-            return "redirect:/menu";
+            return "redirect:/notifJual";
         } else {
-            return "redirect:/jual";
+            return "redirect:/gagalNgiklan";
         }
 
     }
@@ -143,19 +143,19 @@ public class TraderController {
 
         session.setAttribute("loggedInUser", updatedTrader);
 
-        return "redirect:/menu";
+        return "redirect:/notifTopup";
     }
 
     @PostMapping("/Checkout")
     public String checkoutKeranjang(HttpSession session){
         Trader loggedInUser = (Trader) session.getAttribute("loggedInUser");
 
-        traderService.checkoutKeranjang(loggedInUser);
+        String cek = traderService.checkoutKeranjang(loggedInUser);
 
         List<Barang> MarketPlaceItems = traderService.getAllItemsInMarketPlace(loggedInUser);
         session.setAttribute("MarketPlaceItems", MarketPlaceItems);
 
-        return "redirect:/notifTrans";
+        return cek;
     }
     
     @GetMapping("/Search")

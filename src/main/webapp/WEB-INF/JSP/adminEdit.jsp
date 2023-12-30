@@ -332,7 +332,7 @@
         </div>
 
 
-        <form method="post" action="/Jual">
+        <form method="post" action="/admin/AdminEdit">
             <div class="container1">
                 <div>
                     <input type="text" id="namabarang" name="namabarang" required placeholder="Nama Barang">
@@ -370,8 +370,6 @@
                 <button class="kirim-button">Sumbit</button>
             </div>
         </form>
-
-
     </div>
 </div>
 

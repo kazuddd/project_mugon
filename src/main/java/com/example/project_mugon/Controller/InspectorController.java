@@ -43,10 +43,10 @@ public class InspectorController {
             session.setAttribute("items", waitingListItems);
 
             // Redirect ke menu utama jika berhasil
-            return "redirect:/menuins";
+            return "redirect:/notifLoginins";
         } else {
             // Redirect jika login gagal
-            return "redirect:/"; // MASIH BINGUNG
+            return "redirect:/gagalLogin"; // MASIH BINGUNG
         }
     }
 
