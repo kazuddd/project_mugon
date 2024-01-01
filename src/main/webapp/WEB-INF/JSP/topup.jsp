@@ -153,7 +153,7 @@
         text-align: center;
         margin-bottom: 20px;
         font-weight: bold;
-        font-size: 10vx;
+        font-size: 10px;
     }
 
     form {
@@ -230,7 +230,7 @@
         <a href="/menu"><img src="../asep/Group 6.png" alt="Logo Mugon" class="mug-1"/></a>
     </div>
     <div class="profile">
-        <a href="/profile"> <img src="../asep/profile.png" alt="Profil Anda"/></a>
+        <a href="/profile"> <img src="../asep/profiledef.png" alt="Profil Anda"/></a>
         <a href="/topup"><span1>${loggedInUser.nama}</span1></a>
         <a href="/topup"><span2>Rp. ${loggedInUser.saldo}</span2></a>
     </div>
@@ -248,51 +248,52 @@
 
 <div = class="Topup-form">
 <img src="../asep/Group 12.png" alt="Gambar Anda" class="mug-2">
-<div class="Topup-container">
-    <div class="kepala">
-        <h2>Ayo Top Up saldomu agar mudah bertransaksi</h2>
-    </div>
-    <form action="/UpdateSaldo" method="post">
-        <div class="container1">
-            <div>
-                <h3>50.000</h3>
-                <h4>Minimum Topup</h4>
-                <input type="hidden" name="topupAmount" value="50000">
+    <div class="Topup-container">
+        <div class="kepala">
+            <h2>Ayo Top Up saldomu agar mudah bertransaksi</h2>
+        </div>
+        <form action="/UpdateSaldo" method="post">
+            <div class="container1">
+                <div>
+                    <h3>50.000</h3>
+                    <h4>Minimum Topup</h4>
+                    <input type="hidden" name="topupAmount" value="50000">
+                </div>
+                <button type="submit">Tambahkan</button>
             </div>
-            <button type="submit">Tambahkan</button>
-        </div>
-    </form>
-    <form action="/UpdateSaldo" method="post">
-        <div class="container1">
-            <h3>100.000</h3>
-            <input type="hidden" name="topupAmount" value="100000">
-            <button type="submit">Tambahkan</button>
-        </div>
-    </form>
+        </form>
+        <form action="/UpdateSaldo" method="post">
+            <div class="container1">
+                <h3>100.000</h3>
+                <input type="hidden" name="topupAmount" value="100000">
+                <button type="submit">Tambahkan</button>
+            </div>
+        </form>
 
-    <form action="/UpdateSaldo" method="post">
-        <div class="container1">
-            <h3>250.000</h3>
-            <input type="hidden" name="topupAmount" value="250000">
-            <button type="submit">Tambahkan</button>
-        </div>
-    </form>
+        <form action="/UpdateSaldo" method="post">
+            <div class="container1">
+                <h3>250.000</h3>
+                <input type="hidden" name="topupAmount" value="250000">
+                <button type="submit">Tambahkan</button>
+            </div>
+        </form>
 
-    <form action="/UpdateSaldo" method="post">
-        <div class="container1">
-            <h3>1.000.000</h3>
-            <input type="hidden" name="topupAmount" value="1000000">
-            <button type="submit">Tambahkan</button>
-        </div>
-    </form>
+        <form action="/UpdateSaldo" method="post">
+            <div class="container1">
+                <h3>1.000.000</h3>
+                <input type="hidden" name="topupAmount" value="1000000">
+                <button type="submit">Tambahkan</button>
+            </div>
+        </form>
 
-    <form action="/UpdateSaldo" method="post">
-        <div class="container1">
-            <h3>Manual input</h3>
-            <input type="text" name="topupAmount" required>
-            <button type="submit">Tambahkan</button>
-        </div>
-    </form>
+        <form action="/UpdateSaldo" method="post">
+            <div class="container1">
+                <h3>Manual input</h3>
+                <input type="text" name="topupAmount" required>
+                <button type="submit">Tambahkan</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 </body>
