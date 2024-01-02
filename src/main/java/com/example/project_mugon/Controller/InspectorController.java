@@ -1,19 +1,15 @@
 package com.example.project_mugon.Controller;
 
-import ch.qos.logback.core.model.Model;
 import com.example.project_mugon.Model.Barang;
 import com.example.project_mugon.Model.Inspector;
-import com.example.project_mugon.Model.Trader;
 import com.example.project_mugon.Service.BarangService;
 import com.example.project_mugon.Service.InspectorService;
 import jakarta.servlet.http.HttpSession;
 import org.bson.types.ObjectId;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 

@@ -143,7 +143,7 @@
         <label for="email"></label>
         <input type="text" id="email" name="email" required placeholder="Email">
 
-        <input type="text" id="password" name="password" required placeholder="Password">
+        <input type="password" id="password" name="password" required placeholder="Password">
 
         <button type="submit">
             <a style="color: #fff" >BERIKUTNYA</a>

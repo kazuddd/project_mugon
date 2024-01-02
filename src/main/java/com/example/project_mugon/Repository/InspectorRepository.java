@@ -1,7 +1,6 @@
 package com.example.project_mugon.Repository;
 
 import com.example.project_mugon.Model.Inspector;
-import com.example.project_mugon.Model.Trader;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 

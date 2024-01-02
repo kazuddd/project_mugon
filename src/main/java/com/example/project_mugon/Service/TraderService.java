@@ -31,15 +31,11 @@ public class TraderService {
     // Register trader
     public String registerTrader(String nama, String email, String password) {
         // Check if the email ends with "@gmail.com"
-        if (!email.endsWith("@gmail.com")) {
-            return "format_salah";
-        }
+        if (!email.endsWith("@gmail.com")) return "format_salah";
 
         // Check if the trader with the given email already exists
         Optional<Trader> existingTrader = traderRepository.findByEmail(email);
-        if (existingTrader.isPresent()) {
-            return "sudah_ada";
-        }
+        if (existingTrader.isPresent()) return "sudah_ada";
 
         // Create a new Trader object with the provided details
         Trader newTrader = new Trader();
@@ -59,9 +55,7 @@ public class TraderService {
         Optional<Trader> traderOptional = traderRepository.findByEmail(email);
         if (traderOptional.isPresent()) {
             Trader trader = traderOptional.get();
-            if (password.equals(trader.getPassword())) {
-                return trader;
-            }
+            if (password.equals(trader.getPassword())) return trader;
         }
         return null;
     }

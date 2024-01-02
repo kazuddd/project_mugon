@@ -60,7 +60,6 @@ public class TraderController {
                            HttpSession session) {
         // Register trader pada collection Trader lalu login
         String cek = traderService.registerTrader(nama, email, password);
-        System.out.println(cek);
         // Pengecekan apakah login sukses
         if (cek.equals("berhasil")) {
             Trader loggedInUser = traderService.login(email, password);

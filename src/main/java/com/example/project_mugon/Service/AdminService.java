@@ -51,7 +51,6 @@ public class AdminService {
 
         return listBarang;
     }
-
     public List<Barang> getAllItemsInWaitingList() {
         return barangRepository.findByIsVerifiedFalse();
     }
