@@ -14,10 +14,7 @@ public class BarangService {
     private final BarangRepository barangRepository;
     public Barang findByID(ObjectId ID) {
         Optional<Barang> barangOptional = barangRepository.findBy_id(ID);
-        if (barangOptional.isPresent()) {
-            Barang barang = barangOptional.get();
-        }
-        return null;
+        return barangOptional.orElse(null);
     }
 
     public Barang findBy_idMarketPlace(ObjectId ID) {

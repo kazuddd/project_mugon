@@ -50,6 +50,7 @@ public class TraderService {
         newTrader.setListTransaksi(new ArrayList<Transaksi>());
 
         // Save the new Trader
+        traderRepository.save(newTrader);
         return "berhasil";
     }
 
