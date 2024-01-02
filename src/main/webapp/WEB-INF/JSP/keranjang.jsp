@@ -182,6 +182,20 @@
 
     .Checkout button {
         border-radius: 8px;
+        background-color: red;
+        padding: 10px 20px;
+        margin-top: 10px; /* Add margin to separate from the total */
+    }
+
+    .Checkoutt {
+        display: flex;
+        flex-direction: column; /* Change to column layout */
+        align-items: flex-end; /* Align items to the right */
+        color: white;
+    }
+
+    .Checkoutt button {
+        border-radius: 8px;
         background-color: #3F0071;
         padding: 10px 20px;
         margin-top: 10px; /* Add margin to separate from the total */
@@ -196,6 +210,14 @@
         justify-content: center;
         align-items: center;
         margin-bottom: 10px; /* Add margin at the bottom */
+
+        .iklan-delete {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+
 
 
 
@@ -239,14 +261,23 @@
                 for (int i = 0; i < items.size(); i++) {
                     Barang item = items.get(i);
         %>
+        <div class="iklan-delete">
+            <div class="iklan-box">
+                <h3><%= item.getNamaBarang() %></h3>
+                <p>ID: <%= item.getID() %></p>
+                <p>Harga: <%= item.getHarga() %></p>
+                <p>Rating: <%= item.getKondisi() %></p>
+                <p>Lokasi: <%= item.getLokasi() %></p>
+                <div class="Checkout">
+                    <button type="submit">X</button>
+                </div>
+            </div>
 
-        <div class="iklan-box">
-            <h3><%= item.getNamaBarang() %></h3>
-            <p>ID: <%= item.getID() %></p>
-            <p>Harga: <%= item.getHarga() %></p>
-            <p>Rating: <%= item.getKondisi() %></p>
-            <p>Lokasi: <%= item.getLokasi() %></p>
+
+
         </div>
+
+
 
         <!-- Akhir dari looping -->
         <%
@@ -255,7 +286,7 @@
         %>
 
         <form action="/Checkout" method="post">
-            <div class="Checkout">
+            <div class="Checkoutt">
                 <button type="submit">CheckOut</button>
             </div>
         </form>
