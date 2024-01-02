@@ -29,11 +29,16 @@ public class TraderService {
     }
 
     // Register trader
-    public Trader registerTrader(String nama, String email, String password) {
+    public String registerTrader(String nama, String email, String password) {
+        // Check if the email ends with "@gmail.com"
+        if (!email.endsWith("@gmail.com")) {
+            return "format_salah";
+        }
+
         // Check if the trader with the given email already exists
         Optional<Trader> existingTrader = traderRepository.findByEmail(email);
         if (existingTrader.isPresent()) {
-            throw new IllegalArgumentException("Email sudah digunakan.");
+            return "sudah_ada";
         }
 
         // Create a new Trader object with the provided details
@@ -45,7 +50,7 @@ public class TraderService {
         newTrader.setListTransaksi(new ArrayList<Transaksi>());
 
         // Save the new Trader
-        return traderRepository.save(newTrader);
+        return "berhasil";
     }
 
     // Login trader
@@ -222,5 +227,13 @@ public class TraderService {
         }
 
         return foundItems;
+    }
+
+    public void deleteFromKeranjang(String ID, Trader trader){
+        List<ObjectId> keranjang = trader.getKeranjang();
+        ObjectId id = new ObjectId(ID);
+        keranjang.remove(id);
+        trader.setKeranjang(keranjang);
+        traderRepository.save(trader);
     }
 }

@@ -58,11 +58,13 @@ public class TraderController {
                            @RequestParam("email") String email,
                            @RequestParam("password") String password,
                            HttpSession session) {
-        try {
-            // Register trader pada collection Trader lalu login
-            Trader newTrader = traderService.registerTrader(nama, email, password);
+        // Register trader pada collection Trader lalu login
+        String cek = traderService.registerTrader(nama, email, password);
+
+        // Pengecekan apakah login sukses
+        if (cek.equals("berhasil")) {
             Trader loggedInUser = traderService.login(email, password);
-            session.setAttribute("loggedInUser", newTrader);
+            session.setAttribute("loggedInUser", loggedInUser);
 
             // Pengambilan data pada marketplace yang siap dibeli
             List<Barang> MarketPlaceItems = traderService.getAllItemsInMarketPlace(loggedInUser);
@@ -70,18 +72,12 @@ public class TraderController {
             List<Barang> barangKeranjang = traderService.getALlInKeranjang(loggedInUser);
             session.setAttribute("barangKeranjang", barangKeranjang);
 
-            // Pengecekan apakah login sukses
-            if (loggedInUser != null) {
-                // Redirect kedalam menu jika sukses
-                return "redirect:/notifLogin";
-            } else {
-                return "redirect:/gagalLogin";
-            }
-            // Redirect to a success page or URL after successful registration
-
-        } catch (IllegalArgumentException e) {
-            // Redirect jika register gagal
-            return "redirect:/register?error=EmailAlreadyUsed"; // MASIH BINGUNG
+            // Redirect kedalam menu jika sukses
+            return "redirect:/notifLogin";
+        } else if (cek.equals("sudah_ada")) {
+            return "redirect:/gagalRegister";
+        } else {
+            return "redirect:/gagalRegisterFormat";
         }
     }
 
@@ -181,5 +177,14 @@ public class TraderController {
             session.setAttribute("MarketPlaceItems", MarketPlaceItems);
         }
         return "redirect:/menu";
+    }
+
+    public String deleteFromKeranjang(@RequestParam("ID") String id,
+                                      HttpSession session) {
+        Trader loggedInUser = (Trader) session.getAttribute("loggedInUser");
+
+        traderService.deleteFromKeranjang(id, loggedInUser);
+
+        return "redirect:/notifDeleteKeranjang";
     }
 }
