@@ -140,4 +140,26 @@ public class routing {
     public String  notifAddKeranjang() {
         return "notifAddKeranjang";
     }
+
+    @GetMapping("/hapusKeranjang")
+    public String  hapusKeranjang() {
+        return "hapusKeranjang";
+    }
+
+    @GetMapping("/notifRegist")
+    public String notifRegist() {
+        return "notifRegist";
+    }
+
+    @GetMapping("/gagalRegist")
+    public String gagalRegist() {
+        return "gagalRegist";
+    }
+
+    @GetMapping("/emailDigunakan")
+    public String emailDigunakan() {
+        return "emailDigunakan";
+    }
+
+
 }
