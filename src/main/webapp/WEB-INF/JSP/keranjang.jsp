@@ -268,9 +268,10 @@
                 <p>Harga: <%= item.getHarga() %></p>
                 <p>Rating: <%= item.getKondisi() %></p>
                 <p>Lokasi: <%= item.getLokasi() %></p>
-                <div class="Checkout">
+                <form class="Checkout" method="post" action="/deleteFromKeranjang">
+                    <input type="hidden" name="id" value="<%= item.getID() %>">
                     <button type="submit">X</button>
-                </div>
+                </form>
             </div>
 
 

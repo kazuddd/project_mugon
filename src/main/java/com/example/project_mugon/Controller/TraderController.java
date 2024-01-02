@@ -75,9 +75,9 @@ public class TraderController {
             // Redirect kedalam menu jika sukses
             return "redirect:/notifLogin";
         } else if (cek.equals("sudah_ada")) {
-            return "redirect:/gagalRegister";
+            return "redirect:/emailDigunakan";
         } else {
-            return "redirect:/gagalRegisterFormat";
+            return "redirect:/gagalRegist";
         }
     }
 
@@ -179,12 +179,14 @@ public class TraderController {
         return "redirect:/menu";
     }
 
-    public String deleteFromKeranjang(@RequestParam("ID") String id,
+    @PostMapping("deleteFromKeranjang")
+    public String deleteFromKeranjang(@RequestParam("id") String id,
                                       HttpSession session) {
         Trader loggedInUser = (Trader) session.getAttribute("loggedInUser");
 
         traderService.deleteFromKeranjang(id, loggedInUser);
+        session.setAttribute("loggedInUser", loggedInUser);
 
-        return "redirect:/notifDeleteKeranjang";
+        return "redirect:/hapusKeranjang";
     }
 }
